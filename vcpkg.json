@@ -1,0 +1,6 @@
+{
+  "dependencies": [
+    "fuzzylite",
+    "pagmo2"
+  ]
+}
