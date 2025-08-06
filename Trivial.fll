@@ -1,0 +1,119 @@
+Engine: Trivial
+
+# Inclinations
+
+InputVariable: PhysicalInclination
+  enabled: true
+  range: 0 1.000
+  lock-range: false
+  term: tiny Ramp 0.330 0.000 # first position is larger than the second one as an indicator that the ramp is inverted
+  term: low Triangle 0.000 0.330 0.670
+  term: high Triangle 0.330 0.670 1.000
+  term: highest Ramp 0.670 1.000
+InputVariable: MentalInclination
+  enabled: true
+  range: 0 1.000
+  lock-range: false
+  term: tiny Ramp 0.330 0.000 # first position is larger than the second one as an indicator that the ramp is inverted
+  term: low Triangle 0.000 0.330 0.670
+  term: high Triangle 0.330 0.670 1.000
+  term: highest Ramp 0.670 1.000
+
+# Attributes
+
+InputVariable: strength
+  enabled: true
+  range: 0 1.000
+  lock-range: false
+  term: little Ramp 0.330 0.000 # first position is larger than the second one as an indicator that the ramp is inverted
+  term: low Triangle 0.000 0.330 0.670
+  term: high Triangle 0.330 0.670 1.000
+  term: best Ramp 0.670 1.000
+InputVariable: constitution
+  enabled: true
+  range: 0 1.000
+  lock-range: false
+  term: little Ramp 0.330 0.000 # first position is larger than the second one as an indicator that the ramp is inverted
+  term: low Triangle 0.000 0.330 0.670
+  term: high Triangle 0.330 0.670 1.000
+  term: best Ramp 0.670 1.000
+InputVariable: intelligence
+  enabled: true
+  range: 0 1.000
+  lock-range: false
+  term: little Ramp 0.330 0.000 # first position is larger than the second one as an indicator that the ramp is inverted
+  term: low Triangle 0.000 0.330 0.670
+  term: high Triangle 0.330 0.670 1.000
+  term: best Ramp 0.670 1.000
+InputVariable: refinement
+  enabled: true
+  range: 0 1.000
+  lock-range: false
+  term: little Ramp 0.330 0.000 # first position is larger than the second one as an indicator that the ramp is inverted
+  term: low Triangle 0.000 0.330 0.670
+  term: high Triangle 0.330 0.670 1.000
+  term: best Ramp 0.670 1.000
+
+# Action Priorities
+
+OutputVariable: Hunting
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 1.000 0.000
+  term: high Ramp 0.000 1.000
+
+OutputVariable: Lumberjack
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 1.000 0.000
+  term: high Ramp 0.000 1.000
+
+OutputVariable: ScienceClass
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 1.000 0.000
+  term: high Ramp 0.000 1.000
+
+OutputVariable: MannersClass
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 1.000 0.000
+  term: high Ramp 0.000 1.000
+
+
+# Rules
+
+RuleBlock: mamdani
+  enabled: true
+  conjunction: none
+  disjunction: none
+  implication: AlgebraicProduct
+  activation: General
+  rule: if PhysicalInclination is low  and MentalInclination is low    then MannersClass is high
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Hunting is low
+  rule: if MentalInclination is high   and PhysicalInclination is low  then ScienceClass is high
+  rule: if MentalInclination is high   and PhysicalInclination is low  then Lumberjack is low
+  rule: if PhysicalInclination is high and MentalInclination is low    then Lumberjack is high
+  rule: if PhysicalInclination is high and MentalInclination is low    then ScienceClass is low
+  rule: if MentalInclination is high   and PhysicalInclination is high then Hunting is high
+  rule: if MentalInclination is high   and PhysicalInclination is high then MannersClass is low
