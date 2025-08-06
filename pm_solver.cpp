@@ -82,23 +82,31 @@ int main()
 		throw fl::Exception("[engine error] engine is not ready: \n" + status);
 	}
 
-	fl::InputVariable* obstacle = engine->getInputVariable("obstacle");
-	fl::OutputVariable* steer = engine->getOutputVariable("mSteer");
+	// initialize the specimen
+	std::tuple<double, double, double, double> stats{ 0.0, 0.0, 0.0, 0.0 };
 
-	for (int i = 0; i <= 50; ++i)
+	// initialize the inclinations
+	std::tuple<double /* physical */, double /* mental */> inclinations{ 1.0, 0.3 };
+
+	engine->getInputVariable("PhysicalInclination")->setValue(std::get<0>(inclinations));
+	engine->getInputVariable("MentalInclination")->setValue(std::get<1>(inclinations));
+
+	engine->getInputVariable("strength")->setValue(std::get<0>(stats));
+	engine->getInputVariable("constitution")->setValue(std::get<1>(stats));
+	engine->getInputVariable("intelligence")->setValue(std::get<2>(stats));
+	engine->getInputVariable("refinement")->setValue(std::get<3>(stats));
+
+	engine->process();
+	
+	for (int i = 0; i < 4; ++i)
 	{
-		fl::scalar location = obstacle->getMinimum() + i * (obstacle->range() / 50);
-		obstacle->setValue(location);
-		engine->process();
+		fl::OutputVariable* action_priority_var = engine->getOutputVariable(i);
+		std::string action_name{ action_priority_var->getName() };
+		fl::scalar action_priority{ action_priority_var->getValue() };
 
-		std::cout <<
-			"obstacle.input = "
-			<< fl::Op::str(location)
-			<< " => "
-			<< "steer.output = "
-			<< fl::Op::str(steer->getValue())
-			<< "\n";
+		std::cout << "Action " << action_name << " priority: " << action_priority << "\n";
 	}
+
 	/// Fuzzylite smoke test END
 
 	/// Pagmo smoke test BEGIN
