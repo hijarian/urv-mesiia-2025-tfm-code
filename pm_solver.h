@@ -6,5 +6,7 @@
 #include <iostream>
 #include <string>
 #include <exception>
+#include <unordered_map>
+#include <tuple>
 
 // TODO: установите здесь ссылки на дополнительные заголовки, требующиеся для программы.
