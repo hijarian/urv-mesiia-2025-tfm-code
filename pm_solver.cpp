@@ -1,5 +1,8 @@
-﻿// pm_solver.cpp: определяет точку входа для приложения.
-//
+﻿/*
+ * Entry point for the whole application
+ * Depends on fuzzylite and pagmo libraries!
+ */
+
 
 #include "pm_solver.h"
 
@@ -11,12 +14,22 @@
 #include <pagmo/problem.hpp>
 #include <pagmo/problems/schwefel.hpp>
 
-// stats: str, con, intelligence, refinement
+typedef std::tuple<
+	double, // strength
+	double, // constitution
+	double, // intelligence
+	double  // refinement
+	> Stats;
+
+typedef std::tuple<
+	double, // PhysicalInclination
+	double // MentalInclination
+	> Inclinations;
 
 std::unordered_map<
 	std::string, // job name
-	std::tuple<double, double, double, double> // (str, con, intelligence, refinement)
-> jobs{
+	Stats // stat changes after taking this action
+> actions{
 	/*
 	* https://princessmaker.fandom.com/wiki/Hunter_(PM2)
 	* Stats/Skills Affected
@@ -82,12 +95,11 @@ int main()
 		throw fl::Exception("[engine error] engine is not ready: \n" + status);
 	}
 
-	// initialize the specimen
-	std::tuple<double, double, double, double> stats{ 0.0, 0.0, 0.0, 0.0 };
+	// Initialize a specimen
+	Stats stats{ 0.0, 0.0, 0.0, 0.0 };
+	Inclinations inclinations{ 1.0, 0.3 };
 
-	// initialize the inclinations
-	std::tuple<double /* physical */, double /* mental */> inclinations{ 1.0, 0.3 };
-
+	// Load the specimen into the engine
 	engine->getInputVariable("PhysicalInclination")->setValue(std::get<0>(inclinations));
 	engine->getInputVariable("MentalInclination")->setValue(std::get<1>(inclinations));
 
@@ -96,15 +108,22 @@ int main()
 	engine->getInputVariable("intelligence")->setValue(std::get<2>(stats));
 	engine->getInputVariable("refinement")->setValue(std::get<3>(stats));
 
+	// Get action priorities
 	engine->process();
 	
-	for (int i = 0; i < 4; ++i)
+	fl:scalar max_priority{-1'000'000};
+   	std::string chosen_action_name;
+
+	for (int i = 1; i < 4; ++i)
 	{
 		fl::OutputVariable* action_priority_var = engine->getOutputVariable(i);
 		std::string action_name{ action_priority_var->getName() };
 		fl::scalar action_priority{ action_priority_var->getValue() };
 
 		std::cout << "Action " << action_name << " priority: " << action_priority << "\n";
+		if (action_priority > max_priority)
+		{
+		}
 	}
 
 	/// Fuzzylite smoke test END
