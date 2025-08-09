@@ -16,20 +16,30 @@ if(NOT (CMAKE_SYSTEM_NAME STREQUAL "Windows" AND CMAKE_SIZEOF_VOID_P EQUAL 8))
     message(FATAL_ERROR "Этот проект поддерживает только сборку для x64-windows (64-битная Windows).")
 endif()
 
+# Подключение fuzzylite собранного вручную через CMake отдельно от vcpkg.
+#list(APPEND CMAKE_PREFIX_PATH "C:/Software/fuzzylite")
+#   find_package(fuzzylite CONFIG REQUIRED)
+
 # find_package(fuzzylite CONFIG REQUIRED) # fuzzylite не интегрируется с CMake при установке через vcpkg, так что придётся вручную всё подключать, а это оставить как референс.
 find_package(pagmo CONFIG REQUIRED) # Установленный через vcpkg этот пакет называется именно так!
+
+# не работает - ни хера не собирает и не находит потом библиотеку
+add_subdirectory(external/fuzzylite)
 
 # Добавьте источник в исполняемый файл этого проекта.
 add_executable (pm_solver "pm_solver.cpp" "pm_solver.h")
 
+
+
 # Это нужно чтобы подобрать каталог заголовков из vcpkg. Это для fuzzylite, который не интегрируется с CMake при установке через vcpkg.
-target_include_directories(pm_solver PRIVATE
-    ${CMAKE_SOURCE_DIR}/../vcpkg/installed/x64-windows/include
-)
+#target_include_directories(pm_solver PRIVATE
+#   ${CMAKE_SOURCE_DIR}/../vcpkg/installed/x64-windows/include
+#)
 
 target_link_libraries(pm_solver
   PRIVATE
-	${CMAKE_SOURCE_DIR}/../vcpkg/installed/x64-windows/lib/fuzzylite.lib # fuzzylite не интегрируется с CMake при установке через vcpkg, так что указываем библиотеку вручную
+	#${CMAKE_SOURCE_DIR}/../vcpkg/installed/x64-windows/lib/fuzzylite.lib # fuzzylite не интегрируется с CMake при установке через vcpkg, так что указываем библиотеку вручную
+	staticTarget
 	Pagmo::pagmo # Установленный через vcpkg пагмо называется именно так!
 )
 
