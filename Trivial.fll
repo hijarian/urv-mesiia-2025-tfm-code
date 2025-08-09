@@ -6,7 +6,7 @@ InputVariable: PhysicalInclination
   enabled: true
   range: 0 1.000
   lock-range: false
-  term: tiny Ramp 0.330 0.000 # first position is larger than the second one as an indicator that the ramp is inverted
+  term: tiny Ramp 0.330 0.000 
   term: low Triangle 0.000 0.330 0.670
   term: high Triangle 0.330 0.670 1.000
   term: highest Ramp 0.670 1.000
@@ -14,7 +14,7 @@ InputVariable: MentalInclination
   enabled: true
   range: 0 1.000
   lock-range: false
-  term: tiny Ramp 0.330 0.000 # first position is larger than the second one as an indicator that the ramp is inverted
+  term: tiny Ramp 0.330 0.000 
   term: low Triangle 0.000 0.330 0.670
   term: high Triangle 0.330 0.670 1.000
   term: highest Ramp 0.670 1.000
@@ -25,7 +25,7 @@ InputVariable: strength
   enabled: true
   range: 0 1.000
   lock-range: false
-  term: little Ramp 0.330 0.000 # first position is larger than the second one as an indicator that the ramp is inverted
+  term: little Ramp 0.330 0.000 
   term: low Triangle 0.000 0.330 0.670
   term: high Triangle 0.330 0.670 1.000
   term: best Ramp 0.670 1.000
@@ -33,7 +33,7 @@ InputVariable: constitution
   enabled: true
   range: 0 1.000
   lock-range: false
-  term: little Ramp 0.330 0.000 # first position is larger than the second one as an indicator that the ramp is inverted
+  term: little Ramp 0.330 0.000 
   term: low Triangle 0.000 0.330 0.670
   term: high Triangle 0.330 0.670 1.000
   term: best Ramp 0.670 1.000
@@ -41,7 +41,7 @@ InputVariable: intelligence
   enabled: true
   range: 0 1.000
   lock-range: false
-  term: little Ramp 0.330 0.000 # first position is larger than the second one as an indicator that the ramp is inverted
+  term: little Ramp 0.330 0.000 
   term: low Triangle 0.000 0.330 0.670
   term: high Triangle 0.330 0.670 1.000
   term: best Ramp 0.670 1.000
@@ -49,7 +49,7 @@ InputVariable: refinement
   enabled: true
   range: 0 1.000
   lock-range: false
-  term: little Ramp 0.330 0.000 # first position is larger than the second one as an indicator that the ramp is inverted
+  term: little Ramp 0.330 0.000 
   term: low Triangle 0.000 0.330 0.670
   term: high Triangle 0.330 0.670 1.000
   term: best Ramp 0.670 1.000
@@ -105,8 +105,8 @@ OutputVariable: MannersClass
 
 RuleBlock: mamdani
   enabled: true
-  conjunction: none
-  disjunction: none
+  conjunction: Minimum
+  disjunction: Maximum
   implication: AlgebraicProduct
   activation: General
   rule: if PhysicalInclination is low  and MentalInclination is low    then MannersClass is high
