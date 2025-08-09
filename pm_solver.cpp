@@ -26,7 +26,7 @@ typedef std::tuple<
 	double // MentalInclination
 	> Inclinations;
 
-std::unordered_map<
+const std::unordered_map<
 	std::string, // job name
 	Stats // stat changes after taking this action
 > actions{
@@ -80,13 +80,30 @@ Refinement	+1	+1 to 2	+1 to 3	+1 to 4
 	{ "MannersClass", { 0.0, 0.0, 0.0, 2.0 } },
 };
 
+
+template <typename... T>
+std::tuple<T...> tuple_sum(const std::tuple<T...>& a, const std::tuple<T...>& b) {
+	return std::apply([&b](const T&... av) {
+		return std::apply([&](const T&... bv) {
+			return std::make_tuple((av + bv)...);
+			}, b);
+		}, a);
+}
+
+Stats sum_stats(const Stats& a, const Stats& b)
+{
+	return tuple_sum(a, b);
+}
+
 int main()
 {
 
 	// Trivial case draft
 
 	std::string path{ "C:\\projects\\pm_solver\\Trivial.fll"};
-	auto engine{ std::make_unique<fl::Engine>(fl::FllImporter().fromFile(path)) };
+	std::unique_ptr<fl::Engine> engine{ fl::FllImporter().fromFile(path) };
+
+	fuzzylite::fuzzylite::setDebugging(true);
 
 	std::string status;
 
@@ -97,8 +114,10 @@ int main()
 
 	// Initialize a specimen
 	Stats stats{ 0.0, 0.0, 0.0, 0.0 };
-	Inclinations inclinations{ 1.0, 0.3 };
-
+	// Specifically not 1 because it will not fall into the "high" term.
+	// TODO: setup the defaults for output values for the cases when no rules fire and set their strict values.
+	Inclinations inclinations{ 0.67, 0.33 };
+	
 	// Load the specimen into the engine
 	engine->getInputVariable("PhysicalInclination")->setValue(std::get<0>(inclinations));
 	engine->getInputVariable("MentalInclination")->setValue(std::get<1>(inclinations));
@@ -111,20 +130,35 @@ int main()
 	// Get action priorities
 	engine->process();
 	
-	fl:scalar max_priority{-1'000'000};
+	fl::scalar max_priority{-1'000'000};
    	std::string chosen_action_name;
-
-	for (int i = 1; i < 4; ++i)
+	
+	for (const auto action_priority_var : engine->outputVariables())
 	{
-		fl::OutputVariable* action_priority_var = engine->getOutputVariable(i);
 		std::string action_name{ action_priority_var->getName() };
 		fl::scalar action_priority{ action_priority_var->getValue() };
 
 		std::cout << "Action " << action_name << " priority: " << action_priority << "\n";
+
 		if (action_priority > max_priority)
 		{
+			max_priority = action_priority;
+			chosen_action_name = action_name;
 		}
 	}
+
+	std::cout << "Chosen action: " << chosen_action_name << "\n";
+
+	if (chosen_action_name.empty())
+	{
+		std::cout << "No action chosen, exiting.\n";
+		return 0;
+	}
+
+	Stats stats_diff = actions.at(chosen_action_name);
+
+	stats = sum_stats(stats, stats_diff);
+
 
 	/// Fuzzylite smoke test END
 
