@@ -170,8 +170,8 @@ std::string single_step(Stats& stats, const Inclinations& inclinations, fl::Engi
 /** the lower the better (conforming to pagmo2 conventions) */
 double fitness(const Stats& stats)
 {
-	// demo fitness: desirable strength is 0.05+
-	return 0.05 - std::get<0>(stats);
+	// demo fitness: desirable refinement is 0.05+
+	return 0.05 - std::get<3>(stats);
 }
 
 constexpr int T = 4; // number of steps to take
@@ -218,22 +218,96 @@ void print_simulation_result(const SimulationResult& result)
 	}
 }
 
+
+std::string choose_action_fast(fl::Engine* engine, const Stats& stats)
+{
+	// Load the specimen into the engine - assume that inclinations are already set
+
+	engine->getInputVariable("strength")->setValue(std::get<0>(stats));
+	engine->getInputVariable("constitution")->setValue(std::get<1>(stats));
+	engine->getInputVariable("intelligence")->setValue(std::get<2>(stats));
+	engine->getInputVariable("refinement")->setValue(std::get<3>(stats));
+
+	// Get action priorities
+	engine->process();
+
+	const auto& output_vars = engine->outputVariables();
+	auto it = std::max_element(
+		output_vars.begin(), output_vars.end(),
+		[](const auto* a, const auto* b) {
+			// defaulting to 0 if the value is NaN
+			const auto left_priority = std::isnan(a->getValue()) ? 0.0 : a->getValue();
+			const auto right_priority = std::isnan(b->getValue()) ? 0.0 : b->getValue();
+
+			return left_priority < right_priority;
+		}
+	);
+
+	// Either return the name of the action with the highest priority,
+	// or the first action if no rules fired (i.e., all priorities are 0).
+	std::string chosen_action_name = (it != output_vars.end())
+		? (*it)->getName()
+		: (*output_vars.begin())->getName();
+
+	return chosen_action_name;
+}
+
+void single_step_fast(Stats& stats, fl::Engine* engine)
+{
+	// Choose an action based on the current stats and inclinations
+	std::string chosen_action_name = choose_action_fast(engine, stats);
+	// Apply the effects of the chosen action
+	Stats stats_diff = actions.at(chosen_action_name);
+	stats = sum_stats(stats, stats_diff);
+}
+
+double simulate_fast(const Inclinations& inclinations, fl::Engine* engine)
+{
+	// Initialize a specimen
+	Stats stats{ 0.0, 0.0, 0.0, 0.0 };
+
+	engine->restart();
+	// Set inclinations
+	engine->getInputVariable("PhysicalInclination")->setValue(std::get<0>(inclinations));
+	engine->getInputVariable("MentalInclination")->setValue(std::get<1>(inclinations));
+
+	for (int i = 0; i < T; ++i)
+	{
+		single_step_fast(stats, engine);
+	}
+
+	return fitness(stats);
+}
+
+// Pagmo2-compatible problem definition
+struct pm_problem {
+
+	// Implementation of the objective function.
+	pagmo::vector_double fitness(const pagmo::vector_double& dv) const
+	{
+		const Inclinations specimen{ dv[0], dv[1] };
+
+		auto engine = init(); // this is super slow but fuzzylite is not prepared for multithreading so we need to create a new engine for each call
+
+		return { simulate_fast(specimen, engine.get())};
+	}
+
+	/**
+	 * Implementation of the box bounds.
+	 * First element is the lower bound, second is the upper bound.
+	 * Bounds are inclination values for Physical and Mental inclinations.
+	 * 
+	 * (Range is 0.0 - 1.0, we hope that Pagmo2 will correctly interpolate between them)
+	 */
+	std::pair<pagmo::vector_double, pagmo::vector_double> get_bounds() const
+	{
+		return { {0., 0.}, {1., 1.} };
+	}
+};
+
 int main()
 {
-	auto engine = init();
-
-	SimulationResult physical_specimen_result = simulate({ 0.67, 0.33 }, engine.get());
-
-	print_simulation_result(physical_specimen_result);
-
-	SimulationResult mental_specimen_result = simulate({ 0.33, 0.67 }, engine.get());
-
-	print_simulation_result(mental_specimen_result);
-
-
-	/// Pagmo smoke test BEGIN
-
-	pagmo::problem prob(pagmo::schwefel(30));
+	pagmo::problem prob(pm_problem{});
 
 	pagmo::algorithm algo(pagmo::sade(100));
 
@@ -245,10 +319,17 @@ int main()
 
 	for (const auto& isl : archi)
 	{
-		std::cout << isl.get_population().champion_f()[0] << "\n";
-	}
+		const auto& champion = isl.get_population().champion_x();
+		std::cout << "island champion: {" << champion[0] << ", " << champion[1] << "}\n";
 
-	/// Pagmo smoke test END
+		auto engine = init();
+		const auto& result = simulate(
+			{ champion[0], champion[1] },
+			engine.get()
+		);
+
+		print_simulation_result(result);
+	}
 
 	return 0;
 }
