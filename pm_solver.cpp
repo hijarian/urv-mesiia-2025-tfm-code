@@ -95,31 +95,8 @@ Stats sum_stats(const Stats& a, const Stats& b)
 	return tuple_sum(a, b);
 }
 
-int main()
+std::string choose_action(fl::Engine* engine, Inclinations inclinations, Stats stats)
 {
-
-	// Trivial case draft
-
-	std::string path{ "C:\\projects\\pm_solver\\Trivial.fll"};
-	std::unique_ptr<fl::Engine> engine{ fl::FllImporter().fromFile(path) };
-
-	{ // Checking for errors in the engine loading.
-		std::string status;
-		if (not engine->isReady(&status))
-		{
-			throw fl::Exception("[engine error] engine is not ready: \n" + status);
-		}
-	}
-
-	// We want to see the details of the engine processing.
-	fuzzylite::fuzzylite::setDebugging(true);
-
-	// Initialize a specimen
-	Stats stats{ 0.0, 0.0, 0.0, 0.0 };
-	// Specifically not 1 because it will not fall into the "high" term.
-	// TODO: setup the defaults for output values for the cases when no rules fire and set their strict values.
-	Inclinations inclinations{ 0.67, 0.33 };
-	
 	// Load the specimen into the engine
 	engine->getInputVariable("PhysicalInclination")->setValue(std::get<0>(inclinations));
 	engine->getInputVariable("MentalInclination")->setValue(std::get<1>(inclinations));
@@ -131,10 +108,10 @@ int main()
 
 	// Get action priorities
 	engine->process();
-	
-	fl::scalar max_priority{-1'000'000};
-   	std::string chosen_action_name;
-	
+
+	fl::scalar max_priority{ -1'000'000 };
+	std::string chosen_action_name;
+
 	for (const auto action_priority_var : engine->outputVariables())
 	{
 		std::string action_name{ action_priority_var->getName() };
@@ -148,6 +125,41 @@ int main()
 			chosen_action_name = action_name;
 		}
 	}
+
+	return chosen_action_name;
+}
+
+std::unique_ptr<fl::Engine> init()
+{
+	// Initialize the engine
+	std::string path{ "C:\\projects\\pm_solver\\Trivial.fll" };
+	std::unique_ptr<fl::Engine> engine{ fl::FllImporter().fromFile(path) };
+	// Checking for errors in the engine loading.
+	std::string status;
+	if (not engine->isReady(&status))
+	{
+		throw fl::Exception("[engine error] engine is not ready: \n" + status);
+	}
+
+	// We want to see the details of the engine processing.
+	fuzzylite::fuzzylite::setDebugging(true);
+
+	return engine;
+}
+
+int main()
+{
+	// Trivial case draft
+
+	auto engine = init();
+
+	// Initialize a specimen
+	Stats stats{ 0.0, 0.0, 0.0, 0.0 };
+	// Specifically not 1 because it will not fall into the "high" term.
+	// TODO: setup the defaults for output values for the cases when no rules fire and set their strict values.
+	Inclinations inclinations{ 0.67, 0.33 };
+	
+	std::string chosen_action_name = choose_action(engine.get(), inclinations, stats);
 
 	std::cout << "Chosen action: " << chosen_action_name << "\n";
 
