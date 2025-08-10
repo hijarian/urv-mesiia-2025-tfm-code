@@ -150,48 +150,86 @@ std::unique_ptr<fl::Engine> init()
 	return engine;
 }
 
-void single_step(Stats& stats, const Inclinations& inclinations, fl::Engine* engine)
+std::string single_step(Stats& stats, const Inclinations& inclinations, fl::Engine* engine)
 {
 	// Choose an action based on the current stats and inclinations
 	std::string chosen_action_name = choose_action(engine, inclinations, stats);
 	if (chosen_action_name.empty())
 	{
 		std::cout << "No action chosen, exiting.\n";
-		return;
+		return "";
 	}
 	std::cout << "Chosen action: " << chosen_action_name << "\n";
 	// Apply the effects of the chosen action
 	Stats stats_diff = actions.at(chosen_action_name);
 	stats = sum_stats(stats, stats_diff);
+
+	return chosen_action_name;
 }
 
-int main()
+double fitness(const Stats& stats)
 {
-	// Trivial case draft
+	// A simple fitness function that sums the stats
+	// This can be replaced with a more complex evaluation
+	return std::get<0>(stats) + std::get<1>(stats) + std::get<2>(stats) + std::get<3>(stats);
+}
 
-	auto engine = init();
+constexpr int T = 3; // number of steps to take
 
+std::pair<std::vector<std::string>, double> simulate(const Inclinations& inclinations, fl::Engine* engine)
+{
 	// Initialize a specimen
 	Stats stats{ 0.0, 0.0, 0.0, 0.0 };
-	// Specifically not 1 because it will not fall into the "high" term.
-	// TODO: setup the defaults for output values for the cases when no rules fire and set their strict values.
-	Inclinations inclinations{ 0.67, 0.33 };
-	
-	int T = 3; // number of steps to take
+	std::vector<std::string> path{};
+
+	engine->restart();
+
 	for (int i = 0; i < T; ++i)
 	{
 		std::cout << "Step " << i + 1 << ":\n";
-		single_step(stats, inclinations, engine.get());
+		auto step = single_step(stats, inclinations, engine);
 
 		std::cout << "Current stats: "
 			<< "Strength: " << std::get<0>(stats) << ", "
 			<< "Constitution: " << std::get<1>(stats) << ", "
 			<< "Intelligence: " << std::get<2>(stats) << ", "
 			<< "Refinement: " << std::get<3>(stats) << "\n";
-	}
-	
 
-	/// Fuzzylite smoke test END
+		path.push_back(step);
+	}
+
+	return std::make_pair(path, fitness(stats));
+}
+
+using SimulationResult = std::pair<
+	/** Sequence of action names */
+	std::vector<std::string>,
+	/** Fitness value */
+	double>;
+
+void print_simulation_result(const SimulationResult& result)
+{
+	std::cout << "Simulation Result:\n";
+	std::cout << "Fitness: " << result.second << "\n";
+	std::cout << "Actions taken:\n";
+	for (const auto& action : result.first)
+	{
+		std::cout << "- " << action << "\n";
+	}
+}
+
+int main()
+{
+	auto engine = init();
+
+	SimulationResult physical_specimen_result = simulate({ 0.67, 0.33 }, engine.get());
+
+	print_simulation_result(physical_specimen_result);
+
+	SimulationResult mental_specimen_result = simulate({ 0.33, 0.67 }, engine.get());
+
+	print_simulation_result(mental_specimen_result);
+
 
 	/// Pagmo smoke test BEGIN
 
