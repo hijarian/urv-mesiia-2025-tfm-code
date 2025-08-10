@@ -14,17 +14,17 @@
 #include <pagmo/problem.hpp>
 #include <pagmo/problems/schwefel.hpp>
 
-typedef std::tuple<
+using Stats = std::tuple<
 	double, // strength
 	double, // constitution
 	double, // intelligence
 	double  // refinement
-	> Stats;
+	>;
 
-typedef std::tuple<
+using Inclinations = std::tuple<
 	double, // PhysicalInclination
 	double // MentalInclination
-	> Inclinations;
+	>;
 
 const std::unordered_map<
 	std::string, // job name
@@ -103,14 +103,16 @@ int main()
 	std::string path{ "C:\\projects\\pm_solver\\Trivial.fll"};
 	std::unique_ptr<fl::Engine> engine{ fl::FllImporter().fromFile(path) };
 
-	fuzzylite::fuzzylite::setDebugging(true);
-
-	std::string status;
-
-	if (not engine->isReady(&status))
-	{
-		throw fl::Exception("[engine error] engine is not ready: \n" + status);
+	{ // Checking for errors in the engine loading.
+		std::string status;
+		if (not engine->isReady(&status))
+		{
+			throw fl::Exception("[engine error] engine is not ready: \n" + status);
+		}
 	}
+
+	// We want to see the details of the engine processing.
+	fuzzylite::fuzzylite::setDebugging(true);
 
 	// Initialize a specimen
 	Stats stats{ 0.0, 0.0, 0.0, 0.0 };
