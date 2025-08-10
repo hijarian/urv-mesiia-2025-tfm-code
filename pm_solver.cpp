@@ -95,7 +95,7 @@ Stats sum_stats(const Stats& a, const Stats& b)
 	return tuple_sum(a, b);
 }
 
-std::string choose_action(fl::Engine* engine, Inclinations inclinations, Stats stats)
+std::string choose_action(fl::Engine* engine, const Inclinations& inclinations, const Stats& stats)
 {
 	// Load the specimen into the engine
 	engine->getInputVariable("PhysicalInclination")->setValue(std::get<0>(inclinations));
@@ -109,22 +109,25 @@ std::string choose_action(fl::Engine* engine, Inclinations inclinations, Stats s
 	// Get action priorities
 	engine->process();
 
-	fl::scalar max_priority{ -1'000'000 };
-	std::string chosen_action_name;
+	const auto& output_vars = engine->outputVariables();
+	auto it = std::max_element(
+		output_vars.begin(), output_vars.end(),
+		[](const auto* a, const auto* b) {
+			// defaulting to 0 if the value is NaN
+            const auto left_priority = std::isnan(a->getValue()) ? 0.0 : a->getValue();
+            const auto right_priority = std::isnan(b->getValue()) ? 0.0 : b->getValue();
 
-	for (const auto action_priority_var : engine->outputVariables())
-	{
-		std::string action_name{ action_priority_var->getName() };
-		fl::scalar action_priority{ action_priority_var->getValue() };
-
-		std::cout << "Action " << action_name << " priority: " << action_priority << "\n";
-
-		if (action_priority > max_priority)
-		{
-			max_priority = action_priority;
-			chosen_action_name = action_name;
+			std::cout << "Comparing " << a->getName() << " with value " << left_priority
+				<< " and " << b->getName() << " with value " << right_priority << "\n";
+			return left_priority < right_priority;
 		}
-	}
+	);
+
+	// Either return the name of the action with the highest priority,
+	// or the first action if no rules fired (i.e., all priorities are 0).
+	std::string chosen_action_name = (it != output_vars.end())
+		? (*it)->getName()
+		: (*output_vars.begin())->getName();
 
 	return chosen_action_name;
 }
@@ -147,6 +150,21 @@ std::unique_ptr<fl::Engine> init()
 	return engine;
 }
 
+void single_step(Stats& stats, const Inclinations& inclinations, fl::Engine* engine)
+{
+	// Choose an action based on the current stats and inclinations
+	std::string chosen_action_name = choose_action(engine, inclinations, stats);
+	if (chosen_action_name.empty())
+	{
+		std::cout << "No action chosen, exiting.\n";
+		return;
+	}
+	std::cout << "Chosen action: " << chosen_action_name << "\n";
+	// Apply the effects of the chosen action
+	Stats stats_diff = actions.at(chosen_action_name);
+	stats = sum_stats(stats, stats_diff);
+}
+
 int main()
 {
 	// Trivial case draft
@@ -159,20 +177,19 @@ int main()
 	// TODO: setup the defaults for output values for the cases when no rules fire and set their strict values.
 	Inclinations inclinations{ 0.67, 0.33 };
 	
-	std::string chosen_action_name = choose_action(engine.get(), inclinations, stats);
-
-	std::cout << "Chosen action: " << chosen_action_name << "\n";
-
-	if (chosen_action_name.empty())
+	int T = 3; // number of steps to take
+	for (int i = 0; i < T; ++i)
 	{
-		std::cout << "No action chosen, exiting.\n";
-		return 0;
+		std::cout << "Step " << i + 1 << ":\n";
+		single_step(stats, inclinations, engine.get());
+
+		std::cout << "Current stats: "
+			<< "Strength: " << std::get<0>(stats) << ", "
+			<< "Constitution: " << std::get<1>(stats) << ", "
+			<< "Intelligence: " << std::get<2>(stats) << ", "
+			<< "Refinement: " << std::get<3>(stats) << "\n";
 	}
-
-	Stats stats_diff = actions.at(chosen_action_name);
-
-	stats = sum_stats(stats, stats_diff);
-
+	
 
 	/// Fuzzylite smoke test END
 
