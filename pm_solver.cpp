@@ -167,11 +167,11 @@ std::string single_step(Stats& stats, const Inclinations& inclinations, fl::Engi
 	return chosen_action_name;
 }
 
+/** the lower the better (conforming to pagmo2 conventions) */
 double fitness(const Stats& stats)
 {
-	// A simple fitness function that sums the stats
-	// This can be replaced with a more complex evaluation
-	return std::get<0>(stats) + std::get<1>(stats) + std::get<2>(stats) + std::get<3>(stats);
+	// demo fitness: desirable strength is 0.05+
+	return 0.05 - std::get<0>(stats);
 }
 
 constexpr int T = 3; // number of steps to take
