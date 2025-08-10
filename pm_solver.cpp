@@ -145,7 +145,7 @@ std::unique_ptr<fl::Engine> init()
 	}
 
 	// We want to see the details of the engine processing.
-	fuzzylite::fuzzylite::setDebugging(true);
+	fuzzylite::fuzzylite::setDebugging(false);
 
 	return engine;
 }
