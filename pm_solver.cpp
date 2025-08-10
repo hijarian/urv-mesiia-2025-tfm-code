@@ -174,7 +174,7 @@ double fitness(const Stats& stats)
 	return 0.05 - std::get<0>(stats);
 }
 
-constexpr int T = 3; // number of steps to take
+constexpr int T = 4; // number of steps to take
 
 std::pair<std::vector<std::string>, double> simulate(const Inclinations& inclinations, fl::Engine* engine)
 {
