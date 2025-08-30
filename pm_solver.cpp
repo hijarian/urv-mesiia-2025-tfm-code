@@ -67,7 +67,7 @@ Faith	-0	-0 to 1	-0 to 2	-0 to 3
 Magical Defense	-0	-0 to 1	-0 to 1	-0 to 1
 
 	*/
-	{ "ScienceClass", { 0.0, 0.0, 0.20, 0.0 } },
+	{ "ScienceClass", { 0.0, 0.0, 0.02, 0.0 } },
 	/*
 	https://princessmaker.fandom.com/wiki/Protocol_Class_(PM2)
 	Charts
@@ -77,7 +77,7 @@ Decorum	+1	+1 to 2	+1 to 3	+1 to 4
 Refinement	+1	+1 to 2	+1 to 3	+1 to 4
 
 	*/
-	{ "MannersClass", { 0.0, 0.0, 0.0, 2.0 } },
+	{ "MannersClass", { 0.0, 0.0, 0.0, 0.02 } },
 };
 
 
@@ -171,7 +171,7 @@ std::string single_step(Stats& stats, const Inclinations& inclinations, fl::Engi
 double fitness(const Stats& stats)
 {
 	// demo fitness: desirable refinement is 0.05+
-	return 0.05 - std::get<3>(stats);
+	return 0.05 - std::get<1>(stats);
 }
 
 constexpr int T = 4; // number of steps to take
