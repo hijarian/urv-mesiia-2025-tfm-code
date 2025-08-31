@@ -537,104 +537,104 @@ RuleBlock: mamdani
   # and opposite inclination high and the penalized attribute/skill low -> low priority
   # Jobs
   rule: if InclinationFighting is high and strength is low  then Lumberjack is high
-  rule: if InclinationFighting is not high and strength is not low then Lumberjack is medium
   rule: if InclinationArtistry is high and refinement is low    then Lumberjack is low
   #
   rule: if InclinationFighting is high   and constitution is low then Hunting is high
-  rule: if InclinationFighting is somewhat high and constitution is somewhat high then Hunting is medium
   rule: if InclinationArtistry is high  and refinement is low    then Hunting is low
   #
   rule: if InclinationHousekeeping is high and CookingSkill is low then Housework is high
   rule: if InclinationHousekeeping is high and CleaningSkill is low then Housework is high
   rule: if InclinationHousekeeping is high and Temperament is low then Housework is high
-  rule: if InclinationHousekeeping is somewhat high Housework is medium
   rule: if InclinationSinfulness is high and sensitivity is low then Housework is low
   #
   rule: if InclinationHousekeeping is high and sensitivity is low then Babysitting is high
-  rule: if InclinationHousekeeping is somewhat high and sensitivityis low    then Babysitting is medium
   rule: if InclinationArtistry is high and charisma is low then Babysitting is low
   #
   rule: if InclinationHousekeeping is high and morality is low  then Church is high
   rule: if InclinationHousekeeping is high and faith is low  then Church is high
-  rule: if InclinationHousekeeping  is somewhat high and faith is not lot then Church is medium
   rule: if InclinationSinfulness is high and sin is low  then Church is low
   #
-  rule: if MentalInclination is high   and PhysicalInclination is high then Farming is high
-  rule: if PhysicalInclination is high and MentalInclination is low    then Farming is medium
-  rule: if PhysicalInclination is low  and MentalInclination is low    then Farming is low
+  rule: if InclinationFighting is high and strength is low then Farming is high
+  rule: if InclinationFighting is high and constitution is low then Farming is high
+  rule: if InclinationArtistry is high  and refinement is low    then Farming is low
   #
-  rule: if PhysicalInclination is low  and MentalInclination is low    then Innkeeping is high
-  rule: if PhysicalInclination is low  and MentalInclination is low    then Innkeeping is medium
-  rule: if MentalInclination is high   and PhysicalInclination is high then Innkeeping is low
+  rule: if InclinationHousekeeping is high  and CleaningSkill is low  then Innkeeping is high
+  rule: if InclinationFighting  is high   and CombatSkill is low then Innkeeping is low
   #
-  rule: if PhysicalInclination is low  and MentalInclination is low    then Restaurant is high
-  rule: if PhysicalInclination is low  and MentalInclination is low    then Restaurant is medium
-  rule: if MentalInclination is high   and PhysicalInclination is high then Restaurant is low
+  rule: if InclinationHousekeeping is high  and CookingSkill is low    then Restaurant is high
+  rule: if InclinationFighting  is high   and CombatSkill is low then Restaurant is low
   #
-  rule: if MentalInclination is high   and PhysicalInclination is low  then Salon is low
-  rule: if PhysicalInclination is high and MentalInclination is low    then Salon is medium
-  rule: if PhysicalInclination is high and MentalInclination is low    then Salon is high
+  rule: if InclinationArtistry is high   and sensitivity is low  then Salon is low
+  rule: if InclinationFighting  is high   and strength is low then Salon is low
   #
-  rule: if MentalInclination is high   and PhysicalInclination is high then Masonry is high
-  rule: if PhysicalInclination is high and MentalInclination is low    then Masonry is medium
-  rule: if PhysicalInclination is low  and MentalInclination is low    then Masonry is low
+  rule: if InclinationFighting is high   and constitution is low then Masonry is high
+  rule: if InclinationArtistry is high  and charisma is low    then Masonry is low
   #
-  rule: if PhysicalInclination is low  and MentalInclination is low    then Graveyard is high
-  rule: if PhysicalInclination is low  and MentalInclination is low    then Graveyard is medium
-  rule: if MentalInclination is high   and PhysicalInclination is high then Graveyard is low
+  rule: if InclinationMagic is high  and MagicDefence is low  then Graveyard is high
+  rule: if InclinationArtistry is high  and sensitivity is low  then Graveyard is high
+  rule: if InclinationArtistry is high   and charisma is low then Graveyard is low
   #
-  rule: if PhysicalInclination is low  and MentalInclination is low    then Bar is high
-  rule: if PhysicalInclination is low  and MentalInclination is low    then Bar is medium
-  rule: if MentalInclination is high   and PhysicalInclination is high then Bar is low
+  rule: if InclinationArtistry is high  and Eloquence is low    then Bar is high
+  rule: if InclinationHousekeeping is high   and CookingSkill is low then Bar is high
+  rule: if InclinationMagic is high   and intelligence is low then Bar is low
   #
-  rule: if MentalInclination is high   and PhysicalInclination is low  then Tutoring is low
-  rule: if PhysicalInclination is high and MentalInclination is low    then Tutoring is medium
-  rule: if PhysicalInclination is high and MentalInclination is low    then Tutoring is high
+  rule: if InclinationHousekeeping is high   and morality is low  then Tutoring is high
+  rule: if InclinationArtistry is high and charisma is low    then Tutoring is low
   #
-  rule: if MentalInclination is high   and PhysicalInclination is high then SleazyBar is high
-  rule: if PhysicalInclination is high and MentalInclination is low    then SleazyBar is medium
-  rule: if PhysicalInclination is low  and MentalInclination is low    then SleazyBar is low
+  rule: if InclinationSinfulness is high   and sin is low then SleazyBar is high
+  rule: if InclinationArtistry is high   and charisma is low then SleazyBar is high
+  rule: if InclinationHousekeeping is high   and morality is low  then SleazyBar is low
+  rule: if InclinationHousekeeping is high   and faith is low  then SleazyBar is low
+  rule: if InclinationHousekeeping is high   and Temperament is low  then SleazyBar is low
   #
-  rule: if PhysicalInclination is low  and MentalInclination is low    then Cabaret is high
-  rule: if PhysicalInclination is low  and MentalInclination is low    then Cabaret is medium
-  rule: if MentalInclination is high   and PhysicalInclination is high then Cabaret is low
+  rule: if InclinationSinfulness is high  and sin is low    then Cabaret is high
+  rule: if InclinationArtistry is high   and charisma is low then Cabaret is high
+  rule: if InclinationMagic is high   and intelligence is low then Cabaret is low
+  rule: if InclinationHousekeeping is high   and Temperament is low  then Cabaret is low
+  rule: if InclinationArtistry is high   and refinement is low  then Cabaret is low
   # Classes
-  rule: if PhysicalInclination is low  and MentalInclination is low    then DanceClass is high
-  rule: if PhysicalInclination is low  and MentalInclination is low    then DanceClass is medium
-  rule: if MentalInclination is high   and PhysicalInclination is high then DanceClass is low
+  rule: if InclinationFighting is high  and constitution is low    then DanceClass is high
+  rule: if InclinationArtistry is high  and charisma is low    then DanceClass is high
+  rule: if InclinationArtistry is high  and Art is low    then DanceClass is high
+  rule: if InclinationMagic is high  then DanceClass is low
   #
-  rule: if PhysicalInclination is low  and MentalInclination is low    then FencingClass is high
-  rule: if PhysicalInclination is low  and MentalInclination is low    then FencingClass is medium
-  rule: if MentalInclination is high   and PhysicalInclination is high then FencingClass is low
+  rule: if InclinationFighting is high  and CombatSkill is low    then FencingClass is high
+  rule: if InclinationFighting is high  and CombatAttack is low    then FencingClass is high
+  rule: if InclinationHousekeeping is high then FencingClass is low
   #
-  rule: if PhysicalInclination is low  and MentalInclination is low    then FightingClass is high
-  rule: if PhysicalInclination is low  and MentalInclination is low    then FightingClass is medium
-  rule: if MentalInclination is high   and PhysicalInclination is high then FightingClass is low
+  rule: if InclinationFighting is high  and CombatSkill is low    then FightingClass is high
+  rule: if InclinationFighting is high  and CombatDefence is low    then FightingClass is high
+  rule: if InclinationHousekeeping is high then FightingClass is low
   #
-  rule: if PhysicalInclination is low  and MentalInclination is low    then MagicClass is high
-  rule: if PhysicalInclination is low  and MentalInclination is low    then MagicClass is medium
-  rule: if MentalInclination is high   and PhysicalInclination is high then MagicClass is low
+  rule: if InclinationMagic is high  and MagicSkill is low    then MagicClass is high
+  rule: if InclinationMagic is high  and MagicAttack is low    then MagicClass is high
+  rule: if InclinationFighting is high then MagicClass is low
   #
-  rule: if PhysicalInclination is low  and MentalInclination is low    then PaintingClass is high
-  rule: if PhysicalInclination is low  and MentalInclination is low    then PaintingClass is medium
-  rule: if MentalInclination is high   and PhysicalInclination is high then PaintingClass is low
+  rule: if InclinationArtistry is high  and sensitivity is low then PaintingClass is high
+  rule: if InclinationArtistry is high  and refinement is low then PaintingClass is high
+  rule: if InclinationMagic is high  and intelligence is low then PaintingClass is high
+  rule: if InclinationArtistry is high  and Art is low then PaintingClass is high
+  rule: if InclinationFighting is high then PaintingClass is low
   #
-  rule: if PhysicalInclination is low  and MentalInclination is low    then PoetryClass is high
-  rule: if PhysicalInclination is low  and MentalInclination is low    then PoetryClass is medium
-  rule: if MentalInclination is high   and PhysicalInclination is high then PoetryClass is low
+  rule: if InclinationArtistry is high  and refinement is low    then PoetryClass is high
+  rule: if InclinationArtistry is high  and sensitivity is low    then PoetryClass is high
+  rule: if InclinationArtistry is high  and Art is low    then PoetryClass is high
+  rule: if InclinationMagic is high  and intelligence is low then PoetryClass is high
+  rule: if InclinationFighting is high then PoetryClass is low
   #
-  rule: if PhysicalInclination is low  and MentalInclination is low    then StrategyClass is high
-  rule: if PhysicalInclination is low  and MentalInclination is low    then StrategyClass is medium
-  rule: if MentalInclination is high   and PhysicalInclination is high then StrategyClass is low
+  rule: if InclinationMagic is high  and intelligence is low  then StrategyClass is high
+  rule: if InclinationFighting is high  and CombatSkill is low  then StrategyClass is high
+  rule: if InclinationArtistry is high   and sensitivity is low then StrategyClass is low
   #
-  rule: if PhysicalInclination is low  and MentalInclination is low    then TheologyClass is high
-  rule: if PhysicalInclination is low  and MentalInclination is low    then TheologyClass is medium
-  rule: if MentalInclination is high   and PhysicalInclination is high then TheologyClass is low
+  rule: if InclinationMagic is high  and intelligence is low    then TheologyClass is high
+  rule: if InclinationMagic is high  and MagicDefence is low    then TheologyClass is high
+  rule: if InclinationHousekeeping is high   and faith is low then TheologyClass is high
+  rule: if InclinationSinfulness is high then TheologyClass is low
   #
-  rule: if PhysicalInclination is low  and MentalInclination is low    then MannersClass is high
-  rule: if PhysicalInclination is low  and MentalInclination is low    then MannersClass is medium
-  rule: if MentalInclination is high   and PhysicalInclination is high then MannersClass is low
+  rule: if InclinationArtistry is high  and Decorum is low    then MannersClass is high
+  rule: if InclinationArtistry is high   and refinement is low then MannersClass is high
+  rule: if InclinationHousekeeping is high then MannersClass is low
   #
-  rule: if MentalInclination is high   and PhysicalInclination is low  then ScienceClass is high
-  rule: if PhysicalInclination is high and MentalInclination is low    then ScienceClass is medium
-  rule: if PhysicalInclination is high and MentalInclination is low    then ScienceClass is low
+  rule: if InclinationMagic is high and intelligence is low  then ScienceClass is high
+  rule: if InclinationMagic is high and MagicDefence is low  then ScienceClass is low
+  rule: if InclinationHousekeeping is high and faith is low    then ScienceClass is low
