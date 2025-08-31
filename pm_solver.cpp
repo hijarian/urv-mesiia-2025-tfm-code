@@ -39,6 +39,17 @@ using Stats = std::tuple<
     int, // temperament
 >;
 
+void print_stats(const Stats &s) {
+    printf("Stats changes: \n");
+    printf("  str: %+d, con: %+d, int: %+d, ref: %+d, cha: %+d, mor: %+d, fai: %+d, sin: %+d, sen: %+d\n",
+        std::get<0>(s), std::get<1>(s), std::get<2>(s), std::get<3>(s), std::get<4>(s),
+        std::get<5>(s), std::get<6>(s), std::get<7>(s), std::get<8>(s));
+    printf("  cs: %+d, ca: %+d, cd: %+d, ms: %+d, ma: %+d, md: %+d, dec: %+d, art: %+d, elo: %+d, coo: %+d, cle: %+d, tem: %+d\n",
+        std::get<9>(s), std::get<10>(s), std::get<11>(s), std::get<12>(s), std::get<13>(s),
+        std::get<14>(s), std::get<15>(s), std::get<16>(s), std::get<17>(s), std::get<18>(s),
+        std::get<19>(s), std::get<20>(s));
+}
+
 using Inclinations = std::tuple<
     double, // fighting
     double, // magic
@@ -235,14 +246,29 @@ Stats sum_stats(const Stats& a, const Stats& b)
 
 std::string choose_action(fl::Engine* engine, const Inclinations& inclinations, const Stats& stats)
 {
-    // Load the specimen into the engine
-    engine->getInputVariable("PhysicalInclination")->setValue(std::get<0>(inclinations));
-    engine->getInputVariable("MentalInclination")->setValue(std::get<1>(inclinations));
+    // Load the specimen into the engine - assume that inclinations are already set
 
-    engine->getInputVariable("strength")->setValue(std::get<0>(stats));
-    engine->getInputVariable("constitution")->setValue(std::get<1>(stats));
-    engine->getInputVariable("intelligence")->setValue(std::get<2>(stats));
-    engine->getInputVariable("refinement")->setValue(std::get<3>(stats));
+    engine->getInputVariable(5)->setValue(std::get<0>(stats));
+    engine->getInputVariable(6)->setValue(std::get<1>(stats));
+    engine->getInputVariable(7)->setValue(std::get<2>(stats));
+    engine->getInputVariable(8)->setValue(std::get<3>(stats));
+    engine->getInputVariable(9)->setValue(std::get<4>(stats));
+    engine->getInputVariable(10)->setValue(std::get<5>(stats));
+    engine->getInputVariable(11)->setValue(std::get<6>(stats));
+    engine->getInputVariable(12)->setValue(std::get<7>(stats));
+    engine->getInputVariable(13)->setValue(std::get<8>(stats));
+    engine->getInputVariable(14)->setValue(std::get<9>(stats));
+    engine->getInputVariable(15)->setValue(std::get<10>(stats));
+    engine->getInputVariable(16)->setValue(std::get<11>(stats));
+    engine->getInputVariable(17)->setValue(std::get<12>(stats));
+    engine->getInputVariable(18)->setValue(std::get<13>(stats));
+    engine->getInputVariable(19)->setValue(std::get<14>(stats));
+    engine->getInputVariable(20)->setValue(std::get<15>(stats));
+    engine->getInputVariable(21)->setValue(std::get<16>(stats));
+    engine->getInputVariable(22)->setValue(std::get<17>(stats));
+    engine->getInputVariable(23)->setValue(std::get<18>(stats));
+    engine->getInputVariable(24)->setValue(std::get<19>(stats));
+    engine->getInputVariable(25)->setValue(std::get<20>(stats));
 
     // Get action priorities
     engine->process();
@@ -317,21 +343,24 @@ constexpr int T = 4; // number of steps to take
 std::pair<std::vector<std::string>, double> simulate(const Inclinations& inclinations, fl::Engine* engine)
 {
     // Initialize a specimen
-    Stats stats{ 0.0, 0.0, 0.0, 0.0 };
+    Stats stats{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     std::vector<std::string> path{};
 
     engine->restart();
+
+    // Set inclinations
+    engine->getInputVariable(0)->setValue(std::get<0>(inclinations));
+    engine->getInputVariable(1)->setValue(std::get<1>(inclinations));
+    engine->getInputVariable(2)->setValue(std::get<2>(inclinations));
+    engine->getInputVariable(3)->setValue(std::get<3>(inclinations));
+    engine->getInputVariable(4)->setValue(std::get<4>(inclinations));
 
     for (int i = 0; i < T; ++i)
     {
         std::cout << "Step " << i + 1 << ":\n";
         auto step = single_step(stats, inclinations, engine);
 
-        std::cout << "Current stats: "
-            << "Strength: " << std::get<0>(stats) << ", "
-            << "Constitution: " << std::get<1>(stats) << ", "
-            << "Intelligence: " << std::get<2>(stats) << ", "
-            << "Refinement: " << std::get<3>(stats) << "\n";
+        print_stats(stats);
 
         path.push_back(step);
     }
@@ -361,10 +390,27 @@ std::string choose_action_fast(fl::Engine* engine, const Stats& stats)
 {
     // Load the specimen into the engine - assume that inclinations are already set
 
-    engine->getInputVariable("strength")->setValue(std::get<0>(stats));
-    engine->getInputVariable("constitution")->setValue(std::get<1>(stats));
-    engine->getInputVariable("intelligence")->setValue(std::get<2>(stats));
-    engine->getInputVariable("refinement")->setValue(std::get<3>(stats));
+    engine->getInputVariable(5)->setValue(std::get<0>(stats));
+    engine->getInputVariable(6)->setValue(std::get<1>(stats));
+    engine->getInputVariable(7)->setValue(std::get<2>(stats));
+    engine->getInputVariable(8)->setValue(std::get<3>(stats));
+    engine->getInputVariable(9)->setValue(std::get<4>(stats));
+    engine->getInputVariable(10)->setValue(std::get<5>(stats));
+    engine->getInputVariable(11)->setValue(std::get<6>(stats));
+    engine->getInputVariable(12)->setValue(std::get<7>(stats));
+    engine->getInputVariable(13)->setValue(std::get<8>(stats));
+    engine->getInputVariable(14)->setValue(std::get<9>(stats));
+    engine->getInputVariable(15)->setValue(std::get<10>(stats));
+    engine->getInputVariable(16)->setValue(std::get<11>(stats));
+    engine->getInputVariable(17)->setValue(std::get<12>(stats));
+    engine->getInputVariable(18)->setValue(std::get<13>(stats));
+    engine->getInputVariable(19)->setValue(std::get<14>(stats));
+    engine->getInputVariable(20)->setValue(std::get<15>(stats));
+    engine->getInputVariable(21)->setValue(std::get<16>(stats));
+    engine->getInputVariable(22)->setValue(std::get<17>(stats));
+    engine->getInputVariable(23)->setValue(std::get<18>(stats));
+    engine->getInputVariable(24)->setValue(std::get<19>(stats));
+    engine->getInputVariable(25)->setValue(std::get<20>(stats));
 
     // Get action priorities
     engine->process();
@@ -402,12 +448,16 @@ void single_step_fast(Stats& stats, fl::Engine* engine)
 double simulate_fast(const Inclinations& inclinations, fl::Engine* engine)
 {
     // Initialize a specimen
-    Stats stats{ 0.0, 0.0, 0.0, 0.0 };
+    Stats stats{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
     engine->restart();
+
     // Set inclinations
-    engine->getInputVariable("PhysicalInclination")->setValue(std::get<0>(inclinations));
-    engine->getInputVariable("MentalInclination")->setValue(std::get<1>(inclinations));
+    engine->getInputVariable(0)->setValue(std::get<0>(inclinations));
+    engine->getInputVariable(1)->setValue(std::get<1>(inclinations));
+    engine->getInputVariable(2)->setValue(std::get<2>(inclinations));
+    engine->getInputVariable(3)->setValue(std::get<3>(inclinations));
+    engine->getInputVariable(4)->setValue(std::get<4>(inclinations));
 
     for (int i = 0; i < T; ++i)
     {
@@ -425,7 +475,7 @@ struct pm_problem {
     // Implementation of the objective function.
     pagmo::vector_double fitness(const pagmo::vector_double& dv) const
     {
-        const Inclinations specimen{ dv[0], dv[1] };
+        const Inclinations specimen{ dv[0], dv[1], dv[2], dv[3], dv[4] };
 
         std::unique_ptr<fl::Engine> engine_copy(engine.get()->clone()); // wrap in unique_ptr for automatic cleanup
 
@@ -435,13 +485,13 @@ struct pm_problem {
     /**
      * Implementation of the box bounds.
      * First element is the lower bound, second is the upper bound.
-     * Bounds are inclination values for Physical and Mental inclinations.
+     * Bounds are inclination values for five our inclinations.
      * 
      * (Range is 0.0 - 1.0, we hope that Pagmo2 will correctly interpolate between them)
      */
     std::pair<pagmo::vector_double, pagmo::vector_double> get_bounds() const
     {
-        return { {0., 0.}, {1., 1.} };
+        return { {0., 0., 0., 0., 0.}, {1., 1., 1., 1., 1.} };
     }
 };
 
@@ -457,19 +507,30 @@ int main()
 
     archi.wait_check();
 
+    pagmo::vector_double best_champion;
+	double best_fitness = std::numeric_limits<double>::max();
+
     for (const auto& isl : archi)
     {
         const auto& champion = isl.get_population().champion_x();
-        std::cout << "island champion: {" << champion[0] << ", " << champion[1] << "}\n";
+        std::cout << "island champion: {" << champion[0] << ", " << champion[1] << ", " << champion[2] << ", " << champion[3] << ", " << champion[4] << "}\n";
 
-        auto engine = init();
+        if (isl.get_population().champion_f()[0] < best_fitness)
+        {
+            best_fitness = isl.get_population().champion_f()[0];
+            best_champion = champion;
+        }
+    }
+
+
+        std::unique_ptr<fl::Engine> engine_clone(engine.get()->clone());
+
         const auto& result = simulate(
-            { champion[0], champion[1] },
-            engine.get()
+            { best_champion[0], best_champion[1], best_champion[2], best_champion[3], best_champion[4] },
+            engine_clone.get()
         );
 
         print_simulation_result(result);
-    }
 
     return 0;
 }
