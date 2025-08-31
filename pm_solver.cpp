@@ -64,7 +64,7 @@ const std::unordered_map<
         Stats Required
         Constitution, Intelligence.
     */
-    { "Hunting", // name of the action
+    { "Hunting", // +name of the action
         { /*str*/0, /*con*/1, /*int*/0, /*ref*/-1, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/1, /*sen*/0, // 9 stats changes
 		   /*cs*/1,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
         } 
@@ -78,109 +78,109 @@ Stress: +4/day
 Statistics Required
 Constitution, strength.
     */
-    { "Lumberjack", // name of the action
+    { "Lumberjack", // +name of the action
         { /*str*/2, /*con*/0, /*int*/0, /*ref*/-2, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
            /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
         }
     },
-    { "Housework", // name of the action
-        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    { "Housework", // +name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/-2, // 9 stats changes
+        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/+1, /*cle*/+1, /*tem*/+1 // 12 skills changes
         }
     },
-    { "Babysitting", // name of the action
-        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    { "Babysitting", // +name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/-1, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/1, // 9 stats changes
     /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
     }
 },
-    { "Church", // name of the action
-        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    { "Church", // +name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/1, /*fai*/2, /*sin*/-2, /*sen*/0, // 9 stats changes
     /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
     }
 },
-    { "Farming", // name of the action
-        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    { "Farming", // +name of the action
+        { /*str*/+1, /*con*/+1, /*int*/0, /*ref*/-1, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
     /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
     }
 },
-    { "Innkeeping", // name of the action
+    { "Innkeeping", // +name of the action
         { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    /*cs*/+1,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/1, /*tem*/0 // 12 skills changes
+    }
+},
+    { "Restaurant", // +name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    /*cs*/-1,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/+1, /*cle*/0, /*tem*/0 // 12 skills changes
+    }
+},
+    { "Salon", // +name of the action
+        { /*str*/-1, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/+1, // 9 stats changes
     /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
     }
 },
-    { "Restaurant", // name of the action
-        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    { "Masonry", // +name of the action
+        { /*str*/0, /*con*/2, /*int*/0, /*ref*/0, /*cha*/-1, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
     /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
     }
 },
-    { "Salon", // name of the action
-        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    { "Graveyard", // +name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/-1, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/+1, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/1, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    }
+},
+    { "Bar", // +name of the action
+        { /*str*/0, /*con*/0, /*int*/-2, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/+1, /*coo*/+1, /*cle*/0, /*tem*/0 // 12 skills changes
+    }
+},
+    { "Tutoring", // +name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/-1, /*mor*/+1, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
     /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
     }
 },
-    { "Masonry", // name of the action
-        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    { "SleazyBar", // +name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/2, /*mor*/-3, /*fai*/-3, /*sin*/2, /*sen*/0, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/-1 // 12 skills changes
     }
 },
-    { "Graveyard", // name of the action
-        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    { "Cabaret", // +name of the action
+        { /*str*/0, /*con*/0, /*int*/-1, /*ref*/-2, /*cha*/3, /*mor*/0, /*fai*/0, /*sin*/1, /*sen*/0, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/-1 // 12 skills changes
     }
 },
-    { "Bar", // name of the action
-        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
-    }
-},
-    { "Tutoring", // name of the action
-        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
-    }
-},
-    { "SleazyBar", // name of the action
-        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
-    }
-},
-    { "Cabaret", // name of the action
-        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
-    }
-},
-    { "DanceClass", // name of the action
-        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    { "DanceClass", // +name of the action
+        { /*str*/0, /*con*/1, /*int*/0, /*ref*/0, /*cha*/1, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/1, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
         }
     },
-    { "FencingClass", // name of the action
+    { "FencingClass", // +name of the action
         { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+        /*cs*/1,  /*ca*/1,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
         }
     },
-    { "FightingClass", // name of the action
+    { "FightingClass", // +name of the action
         { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+        /*cs*/1,  /*ca*/0,  /*cd*/1,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
         }
     },
-    { "MagicClass", // name of the action
+    { "MagicClass", // +name of the action
         { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/1, /*ma*/2, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
         }
     },
-    { "PaintingClass", // name of the action
-        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    { "PaintingClass", // +name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/1, // 9 stats changes
+        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/2, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
         }
     },
-    { "PoetryClass", // name of the action
-    { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    { "PoetryClass", // +name of the action
+    { /*str*/0, /*con*/0, /*int*/1, /*ref*/1, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/1, // 9 stats changes
+        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/1, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
         }
     },
-    { "StrategyClass", // name of the action
-    { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    { "StrategyClass", // +name of the action
+    { /*str*/0, /*con*/0, /*int*/2, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/-1, // 9 stats changes
+        /*cs*/1,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
         }
     },
         /*
@@ -193,14 +193,14 @@ Faith	-0	-0 to 1	-0 to 2	-0 to 3
 Magical Defense	-0	-0 to 1	-0 to 1	-0 to 1
 
     */
-    { "ScienceClass", 
-{ /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-/*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    { "ScienceClass",  // +name of the action
+{ /*str*/0, /*con*/0, /*int*/2, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/1, /*sin*/0, /*sen*/0, // 9 stats changes
+/*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/1, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
 }
  },
-    { "TheologyClass", // name of the action
-    { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    { "TheologyClass", // +name of the action
+    { /*str*/0, /*con*/0, /*int*/1, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/1, /*sin*/0, /*sen*/0, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/1, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
     }
     },
     /*
@@ -212,9 +212,9 @@ Decorum	+1	+1 to 2	+1 to 3	+1 to 4
 Refinement	+1	+1 to 2	+1 to 3	+1 to 4
 
     */
-    { "MannersClass", 
-    { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+	{ "MannersClass",  // +name of the action
+    { /*str*/0, /*con*/0, /*int*/0, /*ref*/1, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/1, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
         } },
 };
 
