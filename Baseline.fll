@@ -207,7 +207,7 @@ InputVariable: CleaningSkill
   term: low Triangle 0 180 360
   term: high Triangle 180 360 540
   term: best Ramp 360 540
-InputVariable: Temper
+InputVariable: Temperament
   enabled: true
   range: 0 540
   lock-range: false
@@ -531,27 +531,33 @@ RuleBlock: mamdani
   disjunction: Maximum
   implication: AlgebraicProduct
   activation: General
+
   # at least one rule for each action priority
+  # We will follow a pattern where high inclination + low attribute/skill -> high priority
+  # and opposite inclination high and the penalized attribute/skill low -> low priority
+  # Jobs
+  rule: if InclinationFighting is high and strength is low  then Lumberjack is high
+  rule: if InclinationFighting is not high and strength is not low then Lumberjack is medium
+  rule: if InclinationArtistry is high and refinement is low    then Lumberjack is low
   #
-  rule: if MentalInclination is high   and PhysicalInclination is low  then Lumberjack is low
-  rule: if PhysicalInclination is high and MentalInclination is low    then Lumberjack is medium
-  rule: if PhysicalInclination is high and MentalInclination is low    then Lumberjack is high
+  rule: if InclinationFighting is high   and constitution is low then Hunting is high
+  rule: if InclinationFighting is somewhat high and constitution is somewhat high then Hunting is medium
+  rule: if InclinationArtistry is high  and refinement is low    then Hunting is low
   #
-  rule: if MentalInclination is high   and PhysicalInclination is high then Hunting is high
-  rule: if PhysicalInclination is high and MentalInclination is low    then Hunting is medium
-  rule: if PhysicalInclination is low  and MentalInclination is low    then Hunting is low
+  rule: if InclinationHousekeeping is high and CookingSkill is low then Housework is high
+  rule: if InclinationHousekeeping is high and CleaningSkill is low then Housework is high
+  rule: if InclinationHousekeeping is high and Temperament is low then Housework is high
+  rule: if InclinationHousekeeping is somewhat high Housework is medium
+  rule: if InclinationSinfulness is high and sensitivity is low then Housework is low
   #
-  rule: if PhysicalInclination is low  and MentalInclination is low    then Housework is high
-  rule: if PhysicalInclination is low  and MentalInclination is low    then Housework is medium
-  rule: if MentalInclination is high   and PhysicalInclination is high then Housework is low
+  rule: if InclinationHousekeeping is high and sensitivity is low then Babysitting is high
+  rule: if InclinationHousekeeping is somewhat high and sensitivityis low    then Babysitting is medium
+  rule: if InclinationArtistry is high and charisma is low then Babysitting is low
   #
-  rule: if PhysicalInclination is low  and MentalInclination is low    then Babysitting is high
-  rule: if PhysicalInclination is low  and MentalInclination is low    then Babysitting is medium
-  rule: if MentalInclination is high   and PhysicalInclination is high then Babysitting is low
-  #
-  rule: if MentalInclination is high   and PhysicalInclination is low  then Church is low
-  rule: if PhysicalInclination is high and MentalInclination is low    then Church is medium
-  rule: if PhysicalInclination is high and MentalInclination is low    then Church is high
+  rule: if InclinationHousekeeping is high and morality is low  then Church is high
+  rule: if InclinationHousekeeping is high and faith is low  then Church is high
+  rule: if InclinationHousekeeping  is somewhat high and faith is not lot then Church is medium
+  rule: if InclinationSinfulness is high and sin is low  then Church is low
   #
   rule: if MentalInclination is high   and PhysicalInclination is high then Farming is high
   rule: if PhysicalInclination is high and MentalInclination is low    then Farming is medium
