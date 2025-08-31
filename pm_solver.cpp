@@ -309,7 +309,7 @@ std::unique_ptr<fl::Engine> init()
     }
 
     // We want to see the details of the engine processing.
-    fuzzylite::fuzzylite::setDebugging(true);
+    fuzzylite::fuzzylite::setDebugging(false);
 
     return engine;
 }
@@ -531,7 +531,15 @@ void test_simulation(const Inclinations &specimen)
     print_simulation_result(result);
 }
 
-int main_bak()
+int main_debug()
+{
+    //// Example specimen with balanced inclinations
+    const Inclinations specimen{ 0.01, 0.2, 0.7, 0.9, 0.1 };
+    test_simulation(specimen);
+    return 0;
+}
+
+int main()
 {
     pagmo::problem prob(pm_problem{});
 
@@ -549,7 +557,8 @@ int main_bak()
     for (const auto& isl : archi)
     {
         const auto& champion = isl.get_population().champion_x();
-        std::cout << "island champion: {" << champion[0] << ", " << champion[1] << ", " << champion[2] << ", " << champion[3] << ", " << champion[4] << "}\n";
+        std::cout << "island champion: {" << champion[0] << ", " << champion[1] << ", " << champion[2] << ", " << champion[3] << ", " << champion[4] << "}";
+		std::cout << " with fitness: " << isl.get_population().champion_f()[0] << "\n";
 
         if (isl.get_population().champion_f()[0] < best_fitness)
         {
@@ -561,20 +570,5 @@ int main_bak()
 
     test_simulation({ best_champion[0], best_champion[1], best_champion[2], best_champion[3], best_champion[4] });
 
-    return 0;
-}
-
-
-int main()
-{
-    std::string status;
-    if (not engine->isReady(&status))
-    {
-        throw fl::Exception("[engine error] engine is not ready: \n" + status);
-    }
-
-    //// Example specimen with balanced inclinations
-    //const Inclinations specimen{ 0.01, 0.2, 0.7, 0.9, 0.01 };
-    //test_simulation(specimen);
     return 0;
 }
