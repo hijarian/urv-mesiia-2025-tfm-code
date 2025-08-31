@@ -36,7 +36,7 @@ using Stats = std::tuple<
     int, // eloquence
     int, // cooking skill
     int, //19 cleaning skill
-    int, // temperament
+    int // temperament
 >;
 
 void print_stats(const Stats &s) {
@@ -55,7 +55,7 @@ using Inclinations = std::tuple<
     double, // magic
     double, // housekeeping
     double, // artistry
-    double, // sinfulness
+    double // sinfulness
 >;
 
 const std::unordered_map<
@@ -309,7 +309,7 @@ std::unique_ptr<fl::Engine> init()
     }
 
     // We want to see the details of the engine processing.
-    fuzzylite::fuzzylite::setDebugging(false);
+    fuzzylite::fuzzylite::setDebugging(true);
 
     return engine;
 }
@@ -364,7 +364,7 @@ double fitness(const Stats& stats)
 	return fitness_value;
 }
 
-constexpr int T = 4; // number of steps to take
+constexpr int T = 120; // number of steps to take
 
 std::pair<std::vector<std::string>, double> simulate(const Inclinations& inclinations, fl::Engine* engine)
 {
@@ -521,7 +521,17 @@ struct pm_problem {
     }
 };
 
-int main()
+void test_simulation(const Inclinations &specimen)
+{
+    std::unique_ptr<fl::Engine> engine_clone(engine.get()->clone());
+    const auto& result = simulate(
+        specimen,
+        engine_clone.get()
+    );
+    print_simulation_result(result);
+}
+
+int main_bak()
 {
     pagmo::problem prob(pm_problem{});
 
@@ -549,14 +559,22 @@ int main()
     }
 
 
-        std::unique_ptr<fl::Engine> engine_clone(engine.get()->clone());
+    test_simulation({ best_champion[0], best_champion[1], best_champion[2], best_champion[3], best_champion[4] });
 
-        const auto& result = simulate(
-            { best_champion[0], best_champion[1], best_champion[2], best_champion[3], best_champion[4] },
-            engine_clone.get()
-        );
+    return 0;
+}
 
-        print_simulation_result(result);
 
+int main()
+{
+    std::string status;
+    if (not engine->isReady(&status))
+    {
+        throw fl::Exception("[engine error] engine is not ready: \n" + status);
+    }
+
+    //// Example specimen with balanced inclinations
+    //const Inclinations specimen{ 0.01, 0.2, 0.7, 0.9, 0.01 };
+    //test_simulation(specimen);
     return 0;
 }
