@@ -6,42 +6,32 @@ InputVariable: InclinationFighting
   enabled: true
   range: 0 1.000
   lock-range: false
-  term: tiny Ramp 0.330 0.000 
-  term: low Triangle 0.000 0.330 0.670
-  term: high Triangle 0.330 0.670 1.000
-  term: highest Ramp 0.670 1.000
+  term: low Ramp 1.0 0.0 
+  term: high Ramp 0.0 1.0
 InputVariable: InclinationMagic
   enabled: true
   range: 0 1.000
   lock-range: false
-  term: tiny Ramp 0.330 0.000 
-  term: low Triangle 0.000 0.330 0.670
-  term: high Triangle 0.330 0.670 1.000
-  term: highest Ramp 0.670 1.000
+  term: low Ramp 1.0 0.0 
+  term: high Ramp 0.0 1.0
 InputVariable: InclinationHousekeeping
   enabled: true
   range: 0 1.000
   lock-range: false
-  term: tiny Ramp 0.330 0.000 
-  term: low Triangle 0.000 0.330 0.670
-  term: high Triangle 0.330 0.670 1.000
-  term: highest Ramp 0.670 1.000
+  term: low Ramp 1.0 0.0 
+  term: high Ramp 0.0 1.0
 InputVariable: InclinationArtistry
   enabled: true
   range: 0 1.000
   lock-range: false
-  term: tiny Ramp 0.330 0.000 
-  term: low Triangle 0.000 0.330 0.670
-  term: high Triangle 0.330 0.670 1.000
-  term: highest Ramp 0.670 1.000
+  term: low Ramp 1.0 0.0 
+  term: high Ramp 0.0 1.0
 InputVariable: InclinationSinfulness
   enabled: true
   range: 0 1.000
   lock-range: false
-  term: tiny Ramp 0.330 0.000 
-  term: low Triangle 0.000 0.330 0.670
-  term: high Triangle 0.330 0.670 1.000
-  term: highest Ramp 0.670 1.000
+  term: low Ramp 1.0 0.0 
+  term: high Ramp 0.0 1.0
 
 # Attributes
 
@@ -49,172 +39,130 @@ InputVariable: strength
   enabled: true
   range: 0 810
   lock-range: false
-  term: little Ramp 270 0 
-  term: low Triangle 0 270 540
-  term: high Triangle 270 540 810
-  term: best Ramp 540 810
+  term: low Ramp 810 0 
+  term: high Ramp 0 810
 InputVariable: constitution
   enabled: true
   range: 0 810
   lock-range: false
-  term: little Ramp 270 0 
-  term: low Triangle 0 270 540
-  term: high Triangle 270 540 810
-  term: best Ramp 540 810
+  term: low Ramp 810 0 
+  term: high Ramp 0 810
 InputVariable: intelligence
   enabled: true
   range: 0 810
   lock-range: false
-  term: little Ramp 270 0 
-  term: low Triangle 0 270 540
-  term: high Triangle 270 540 810
-  term: best Ramp 540 810
+  term: low Ramp 810 0 
+  term: high Ramp 0 810
 InputVariable: refinement
   enabled: true
   range: 0 810
   lock-range: false
-  term: little Ramp 270 0 
-  term: low Triangle 0 270 540
-  term: high Triangle 270 540 810
-  term: best Ramp 540 810
+  term: low Ramp 810 0 
+  term: high Ramp 0 810
 InputVariable: charisma
   enabled: true
   range: 0 810
   lock-range: false
-  term: little Ramp 270 0 
-  term: low Triangle 0 270 540
-  term: high Triangle 270 540 810
-  term: best Ramp 540 810
+  term: low Ramp 810 0 
+  term: high Ramp 0 810
 InputVariable: morality
   enabled: true
   range: 0 810
   lock-range: false
-  term: little Ramp 270 0 
-  term: low Triangle 0 270 540
-  term: high Triangle 270 540 810
-  term: best Ramp 540 810
+  term: low Ramp 810 0 
+  term: high Ramp 0 810
 InputVariable: faith
   enabled: true
   range: 0 810
   lock-range: false
-  term: little Ramp 270 0 
-  term: low Triangle 0 270 540
-  term: high Triangle 270 540 810
-  term: best Ramp 540 810
+  term: low Ramp 810 0 
+  term: high Ramp 0 810
 InputVariable: sinfulness
   enabled: true
   range: 0 810
   lock-range: false
-  term: little Ramp 270 0 
-  term: low Triangle 0 270 540
-  term: high Triangle 270 540 810
-  term: best Ramp 540 810
+  term: low Ramp 810 0 
+  term: high Ramp 0 810
 InputVariable: sensitivity
   enabled: true
   range: 0 810
   lock-range: false
-  term: little Ramp 270 0 
-  term: low Triangle 0 270 540
-  term: high Triangle 270 540 810
-  term: best Ramp 540 810
+  term: low Ramp 810 0 
+  term: high Ramp 0 810
 
 # Skills (same as attributes but range is 0-540 instead of 0-810)
 InputVariable: CombatSkill
   enabled: true
   range: 0 540
   lock-range: false
-  term: little Ramp 180 0 
-  term: low Triangle 0 180 360
-  term: high Triangle 180 360 540
-  term: best Ramp 360 540
+  term: low Ramp 540 0 
+  term: high Ramp 0 540
 InputVariable: CombatAttack
   enabled: true
   range: 0 540
   lock-range: false
-  term: little Ramp 180 0 
-  term: low Triangle 0 180 360
-  term: high Triangle 180 360 540
-  term: best Ramp 360 540
+  term: low Ramp 540 0 
+  term: high Ramp 0 540
 InputVariable: CombatDefense
   enabled: true
   range: 0 540
   lock-range: false
-  term: little Ramp 180 0 
-  term: low Triangle 0 180 360
-  term: high Triangle 180 360 540
-  term: best Ramp 360 540
+  term: low Ramp 540 0 
+  term: high Ramp 0 540
 InputVariable: MagicSkill
   enabled: true
   range: 0 540
   lock-range: false
-  term: little Ramp 180 0 
-  term: low Triangle 0 180 360
-  term: high Triangle 180 360 540
-  term: best Ramp 360 540
+  term: low Ramp 540 0 
+  term: high Ramp 0 540
 InputVariable: MagicAttack
   enabled: true
   range: 0 540
   lock-range: false
-  term: little Ramp 180 0 
-  term: low Triangle 0 180 360
-  term: high Triangle 180 360 540
-  term: best Ramp 360 540
+  term: low Ramp 540 0 
+  term: high Ramp 0 540
 InputVariable: MagicDefense
   enabled: true
   range: 0 540
   lock-range: false
-  term: little Ramp 180 0 
-  term: low Triangle 0 180 360
-  term: high Triangle 180 360 540
-  term: best Ramp 360 540
+  term: low Ramp 540 0 
+  term: high Ramp 0 540
 InputVariable: Decorum
   enabled: true
   range: 0 540
   lock-range: false
-  term: little Ramp 180 0 
-  term: low Triangle 0 180 360
-  term: high Triangle 180 360 540
-  term: best Ramp 360 540
+  term: low Ramp 540 0 
+  term: high Ramp 0 540
 InputVariable: Artistry
   enabled: true
   range: 0 540
   lock-range: false
-  term: little Ramp 180 0 
-  term: low Triangle 0 180 360
-  term: high Triangle 180 360 540
-  term: best Ramp 360 540
+  term: low Ramp 540 0 
+  term: high Ramp 0 540
 InputVariable: Eloquence
   enabled: true
   range: 0 540
   lock-range: false
-  term: little Ramp 180 0 
-  term: low Triangle 0 180 360
-  term: high Triangle 180 360 540
-  term: best Ramp 360 540
+  term: low Ramp 540 0 
+  term: high Ramp 0 540
 InputVariable: CookingSkill
   enabled: true
   range: 0 540
   lock-range: false
-  term: little Ramp 180 0 
-  term: low Triangle 0 180 360
-  term: high Triangle 180 360 540
-  term: best Ramp 360 540
+  term: low Ramp 540 0 
+  term: high Ramp 0 540
 InputVariable: CleaningSkill
   enabled: true
   range: 0 540
   lock-range: false
-  term: little Ramp 180 0 
-  term: low Triangle 0 180 360
-  term: high Triangle 180 360 540
-  term: best Ramp 360 540
+  term: low Ramp 540 0 
+  term: high Ramp 0 540
 InputVariable: Temperament
   enabled: true
   range: 0 540
   lock-range: false
-  term: little Ramp 180 0 
-  term: low Triangle 0 180 360
-  term: high Triangle 180 360 540
-  term: best Ramp 360 540
+  term: low Ramp 540 0 
+  term: high Ramp 0 540
 
 # Action Priorities
 
