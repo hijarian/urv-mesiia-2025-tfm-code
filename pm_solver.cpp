@@ -279,6 +279,8 @@ double simulate_fast(const Inclinations& inclinations, fl::Engine* engine)
 	return fitness(stats);
 }
 
+static auto engine = init(); // this is super slow but fuzzylite is not prepared for multithreading so we need to create a new engine for each call
+
 // Pagmo2-compatible problem definition
 struct pm_problem {
 
@@ -287,9 +289,9 @@ struct pm_problem {
 	{
 		const Inclinations specimen{ dv[0], dv[1] };
 
-		auto engine = init(); // this is super slow but fuzzylite is not prepared for multithreading so we need to create a new engine for each call
+		std::unique_ptr<fl::Engine> engine_copy(engine.get()->clone()); // wrap in unique_ptr for automatic cleanup
 
-		return { simulate_fast(specimen, engine.get())};
+		return { simulate_fast(specimen, engine_copy.get())};
 	}
 
 	/**
