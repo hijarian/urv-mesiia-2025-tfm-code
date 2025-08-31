@@ -101,7 +101,7 @@ InputVariable: faith
   term: low Triangle 0 270 540
   term: high Triangle 270 540 810
   term: best Ramp 540 810
-InputVariable: sin
+InputVariable: sinfulness
   enabled: true
   range: 0 810
   lock-range: false
@@ -550,13 +550,13 @@ RuleBlock: mamdani
   rule: if InclinationHousekeeping is high and sensitivity is low then Babysitting is high
   rule: if InclinationArtistry is high and charisma is low then Babysitting is low
   #
-  rule: if InclinationHousekeeping is high and morality is low  then Church is high
-  rule: if InclinationHousekeeping is high and faith is low  then Church is high
-  rule: if InclinationSinfulness is high and sin is low  then Church is low
+  rule: if InclinationHousekeeping is high and morality is low then Church is high
+  rule: if InclinationHousekeeping is high and faith    is low then Church is high
+  rule: if InclinationSinfulness is high and sinfulness is low then Church is low
   #
-  rule: if InclinationFighting is high and strength is low then Farming is high
+  rule: if InclinationFighting is high and strength     is low then Farming is high
   rule: if InclinationFighting is high and constitution is low then Farming is high
-  rule: if InclinationArtistry is high  and refinement is low    then Farming is low
+  rule: if InclinationArtistry is high and refinement   is low then Farming is low
   #
   rule: if InclinationHousekeeping is high  and CleaningSkill is low  then Innkeeping is high
   rule: if InclinationFighting  is high   and CombatSkill is low then Innkeeping is low
@@ -581,13 +581,13 @@ RuleBlock: mamdani
   rule: if InclinationHousekeeping is high   and morality is low  then Tutoring is high
   rule: if InclinationArtistry is high and charisma is low    then Tutoring is low
   #
-  rule: if InclinationSinfulness is high   and sin is low then SleazyBar is high
+  rule: if InclinationSinfulness is high   and sinfulness is low then SleazyBar is high
   rule: if InclinationArtistry is high   and charisma is low then SleazyBar is high
   rule: if InclinationHousekeeping is high   and morality is low  then SleazyBar is low
   rule: if InclinationHousekeeping is high   and faith is low  then SleazyBar is low
   rule: if InclinationHousekeeping is high   and Temperament is low  then SleazyBar is low
   #
-  rule: if InclinationSinfulness is high  and sin is low    then Cabaret is high
+  rule: if InclinationSinfulness is high  and sinfulness is low    then Cabaret is high
   rule: if InclinationArtistry is high   and charisma is low then Cabaret is high
   rule: if InclinationMagic is high   and intelligence is low then Cabaret is low
   rule: if InclinationHousekeeping is high   and Temperament is low  then Cabaret is low
