@@ -105,7 +105,7 @@ Constitution, strength.
 },
     { "Innkeeping", // +name of the action
         { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
-    /*cs*/+1,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/1, /*tem*/0 // 12 skills changes
+    /*cs*/-1,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/1, /*tem*/0 // 12 skills changes
     }
 },
     { "Restaurant", // +name of the action
@@ -194,8 +194,8 @@ Magical Defense	-0	-0 to 1	-0 to 1	-0 to 1
 
     */
     { "ScienceClass",  // +name of the action
-{ /*str*/0, /*con*/0, /*int*/2, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/1, /*sin*/0, /*sen*/0, // 9 stats changes
-/*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/1, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+{ /*str*/0, /*con*/0, /*int*/2, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/-1, /*sin*/0, /*sen*/0, // 9 stats changes
+/*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/-1, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
 }
  },
     { "TheologyClass", // +name of the action
