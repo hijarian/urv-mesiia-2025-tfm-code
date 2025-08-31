@@ -15,268 +15,406 @@
 #include <pagmo/problems/schwefel.hpp>
 
 using Stats = std::tuple<
-	double, // strength
-	double, // constitution
-	double, // intelligence
-	double  // refinement
-	>;
+    int, // strength
+    int, // constitution
+    int, // intelligence
+    int, // refinement
+    int, // charisma
+    int, // morality
+    int, // faith
+    int, // sin
+    int, // sensitivity
+
+    int, // combat skill
+    int, // combat attack
+    int, // combat defense
+    int, // magic skill
+    int, // magic attack
+    int, // magic defense
+    int, // decorum
+	int, // artistry skill
+    int, // eloquence
+    int, // cooking skill
+    int, // cleaning skill
+    int, // temperament
+>;
 
 using Inclinations = std::tuple<
-	double, // PhysicalInclination
-	double // MentalInclination
-	>;
+    double, // fighting
+    double, // magic
+    double, // housekeeping
+    double, // artistry
+    double, // sinfulness
+>;
 
 const std::unordered_map<
-	std::string, // job name
-	Stats // stat changes after taking this action
+    std::string, // job name
+    Stats // stat changes after taking this action
 > actions{
-	/*
-	* https://princessmaker.fandom.com/wiki/Hunter_(PM2)
-	* Stats/Skills Affected
-		Constitution: +1/day
-		Combat Skill: Random raise, + 0 to 1/day
-		Refinement: -1/day
-		Sin: Random raise, +0 to 1/day
-		Stress: +3/day
-		Hidden Stat:
-		Maternal Instinct: -1/day
-		Stats Required
-		Constitution, Intelligence.
-	*/
-	{ "Hunting",    { 0.00, 0.01, 0.00, -0.01 } },
-	/*
-	* https://princessmaker.fandom.com/wiki/Lumberjack_(PM2)
-	* Statistics Affected
+    /*
+    * https://princessmaker.fandom.com/wiki/Hunter_(PM2)
+    * Stats/Skills Affected
+        Constitution: +1/day
+        Combat Skill: Random raise, + 0 to 1/day
+        Refinement: -1/day
+        Sin: Random raise, +0 to 1/day
+        Stress: +3/day
+        Hidden Stat:
+        Maternal Instinct: -1/day
+        Stats Required
+        Constitution, Intelligence.
+    */
+    { "Hunting", // name of the action
+        { /*str*/0, /*con*/1, /*int*/0, /*ref*/-1, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/1, /*sen*/0, // 9 stats changes
+		   /*cs*/1,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+        } 
+    },
+    /*
+    * https://princessmaker.fandom.com/wiki/Lumberjack_(PM2)
+    * Statistics Affected
 Strength: +2/day
-
 Refinement: -2/day
-
 Stress: +4/day
-
 Statistics Required
 Constitution, strength.
-	*/
-	{ "Lumberjack", { 0.02, 0.00, 0.00, -0.02 } },
-	/*
-	* https://princessmaker.fandom.com/wiki/Science_Class_(PM2)
-	* Charts
+    */
+    { "Lumberjack", // name of the action
+        { /*str*/2, /*con*/0, /*int*/0, /*ref*/-2, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+           /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+        }
+    },
+    { "Housework", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+        }
+    },
+    { "Babysitting", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    }
+},
+    { "Church", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    }
+},
+    { "Farming", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    }
+},
+    { "Innkeeping", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    }
+},
+    { "Restaurant", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    }
+},
+    { "Salon", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    }
+},
+    { "Masonry", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    }
+},
+    { "Graveyard", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    }
+},
+    { "Bar", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    }
+},
+    { "Tutoring", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    }
+},
+    { "SleazyBar", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    }
+},
+    { "Cabaret", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    }
+},
+    { "DanceClass", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+        }
+    },
+    { "FencingClass", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+        }
+    },
+    { "FightingClass", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+        }
+    },
+    { "MagicClass", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+        }
+    },
+    { "PaintingClass", // name of the action
+        { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+        }
+    },
+    { "PoetryClass", // name of the action
+    { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+        }
+    },
+    { "StrategyClass", // name of the action
+    { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+        }
+    },
+        /*
+    * https://princessmaker.fandom.com/wiki/Science_Class_(PM2)
+    * Charts
 Science	Novice	Adept	Expert	Master
 Tuition/Day	30 G	40 G	50 G	60 G
 Intelligence	+1 to 4	+2 to 6	+3 to 8	+4 to 12
 Faith	-0	-0 to 1	-0 to 2	-0 to 3
 Magical Defense	-0	-0 to 1	-0 to 1	-0 to 1
 
-	*/
-	{ "ScienceClass", { 0.0, 0.0, 0.02, 0.0 } },
-	/*
-	https://princessmaker.fandom.com/wiki/Protocol_Class_(PM2)
-	Charts
+    */
+    { "ScienceClass", 
+{ /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+/*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+}
+ },
+    { "TheologyClass", // name of the action
+    { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+    /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+    }
+    },
+    /*
+    https://princessmaker.fandom.com/wiki/Protocol_Class_(PM2)
+    Charts
 Protocol	Novice	Adept	Expert	Master
 Tuition/Day	40 G	50 G	60 G	70 G
 Decorum	+1	+1 to 2	+1 to 3	+1 to 4
 Refinement	+1	+1 to 2	+1 to 3	+1 to 4
 
-	*/
-	{ "MannersClass", { 0.0, 0.0, 0.0, 0.02 } },
+    */
+    { "MannersClass", 
+    { /*str*/0, /*con*/0, /*int*/0, /*ref*/0, /*cha*/0, /*mor*/0, /*fai*/0, /*sin*/0, /*sen*/0, // 9 stats changes
+        /*cs*/0,  /*ca*/0,  /*cd*/0,  /*ms*/0, /*ma*/0, /*md*/0, /*dec*/0, /*art*/0, /*elo*/0, /*coo*/0, /*cle*/0, /*tem*/0 // 12 skills changes
+        } },
 };
 
 
 template <typename... T>
 std::tuple<T...> tuple_sum(const std::tuple<T...>& a, const std::tuple<T...>& b) {
-	return std::apply([&b](const T&... av) {
-		return std::apply([&](const T&... bv) {
-			return std::make_tuple((av + bv)...);
-			}, b);
-		}, a);
+    return std::apply([&b](const T&... av) {
+        return std::apply([&](const T&... bv) {
+            return std::make_tuple((av + bv)...);
+            }, b);
+        }, a);
 }
 
 Stats sum_stats(const Stats& a, const Stats& b)
 {
-	return tuple_sum(a, b);
+    return tuple_sum(a, b);
 }
 
 std::string choose_action(fl::Engine* engine, const Inclinations& inclinations, const Stats& stats)
 {
-	// Load the specimen into the engine
-	engine->getInputVariable("PhysicalInclination")->setValue(std::get<0>(inclinations));
-	engine->getInputVariable("MentalInclination")->setValue(std::get<1>(inclinations));
+    // Load the specimen into the engine
+    engine->getInputVariable("PhysicalInclination")->setValue(std::get<0>(inclinations));
+    engine->getInputVariable("MentalInclination")->setValue(std::get<1>(inclinations));
 
-	engine->getInputVariable("strength")->setValue(std::get<0>(stats));
-	engine->getInputVariable("constitution")->setValue(std::get<1>(stats));
-	engine->getInputVariable("intelligence")->setValue(std::get<2>(stats));
-	engine->getInputVariable("refinement")->setValue(std::get<3>(stats));
+    engine->getInputVariable("strength")->setValue(std::get<0>(stats));
+    engine->getInputVariable("constitution")->setValue(std::get<1>(stats));
+    engine->getInputVariable("intelligence")->setValue(std::get<2>(stats));
+    engine->getInputVariable("refinement")->setValue(std::get<3>(stats));
 
-	// Get action priorities
-	engine->process();
+    // Get action priorities
+    engine->process();
 
-	const auto& output_vars = engine->outputVariables();
-	auto it = std::max_element(
-		output_vars.begin(), output_vars.end(),
-		[](const auto* a, const auto* b) {
-			// defaulting to 0 if the value is NaN
+    const auto& output_vars = engine->outputVariables();
+    auto it = std::max_element(
+        output_vars.begin(), output_vars.end(),
+        [](const auto* a, const auto* b) {
+            // defaulting to 0 if the value is NaN
             const auto left_priority = std::isnan(a->getValue()) ? 0.0 : a->getValue();
             const auto right_priority = std::isnan(b->getValue()) ? 0.0 : b->getValue();
 
-			std::cout << "Comparing " << a->getName() << " with value " << left_priority
-				<< " and " << b->getName() << " with value " << right_priority << "\n";
-			return left_priority < right_priority;
-		}
-	);
+            std::cout << "Comparing " << a->getName() << " with value " << left_priority
+                << " and " << b->getName() << " with value " << right_priority << "\n";
+            return left_priority < right_priority;
+        }
+    );
 
-	// Either return the name of the action with the highest priority,
-	// or the first action if no rules fired (i.e., all priorities are 0).
-	std::string chosen_action_name = (it != output_vars.end())
-		? (*it)->getName()
-		: (*output_vars.begin())->getName();
+    // Either return the name of the action with the highest priority,
+    // or the first action if no rules fired (i.e., all priorities are 0).
+    std::string chosen_action_name = (it != output_vars.end())
+        ? (*it)->getName()
+        : (*output_vars.begin())->getName();
 
-	return chosen_action_name;
+    return chosen_action_name;
 }
 
 std::unique_ptr<fl::Engine> init()
 {
-	// Initialize the engine
-	std::string path{ "C:\\projects\\pm_solver\\Trivial.fll" };
-	std::unique_ptr<fl::Engine> engine{ fl::FllImporter().fromFile(path) };
-	// Checking for errors in the engine loading.
-	std::string status;
-	if (not engine->isReady(&status))
-	{
-		throw fl::Exception("[engine error] engine is not ready: \n" + status);
-	}
+    // Initialize the engine
+    std::string path{ "C:\\projects\\pm_solver\\Baseline.fll" };
+    std::unique_ptr<fl::Engine> engine{ fl::FllImporter().fromFile(path) };
+    // Checking for errors in the engine loading.
+    std::string status;
+    if (not engine->isReady(&status))
+    {
+        throw fl::Exception("[engine error] engine is not ready: \n" + status);
+    }
 
-	// We want to see the details of the engine processing.
-	fuzzylite::fuzzylite::setDebugging(false);
+    // We want to see the details of the engine processing.
+    fuzzylite::fuzzylite::setDebugging(false);
 
-	return engine;
+    return engine;
 }
 
 std::string single_step(Stats& stats, const Inclinations& inclinations, fl::Engine* engine)
 {
-	// Choose an action based on the current stats and inclinations
-	std::string chosen_action_name = choose_action(engine, inclinations, stats);
-	if (chosen_action_name.empty())
-	{
-		std::cout << "No action chosen, exiting.\n";
-		return "";
-	}
-	std::cout << "Chosen action: " << chosen_action_name << "\n";
-	// Apply the effects of the chosen action
-	Stats stats_diff = actions.at(chosen_action_name);
-	stats = sum_stats(stats, stats_diff);
+    // Choose an action based on the current stats and inclinations
+    std::string chosen_action_name = choose_action(engine, inclinations, stats);
+    if (chosen_action_name.empty())
+    {
+        std::cout << "No action chosen, exiting.\n";
+        return "";
+    }
+    std::cout << "Chosen action: " << chosen_action_name << "\n";
+    // Apply the effects of the chosen action
+    Stats stats_diff = actions.at(chosen_action_name);
+    stats = sum_stats(stats, stats_diff);
 
-	return chosen_action_name;
+    return chosen_action_name;
 }
 
 /** the lower the better (conforming to pagmo2 conventions) */
 double fitness(const Stats& stats)
 {
-	// demo fitness: desirable refinement is 0.05+
-	return 0.05 - std::get<1>(stats);
+    // demo fitness: desirable refinement is 0.05+
+    return 0.05 - std::get<1>(stats);
 }
 
 constexpr int T = 4; // number of steps to take
 
 std::pair<std::vector<std::string>, double> simulate(const Inclinations& inclinations, fl::Engine* engine)
 {
-	// Initialize a specimen
-	Stats stats{ 0.0, 0.0, 0.0, 0.0 };
-	std::vector<std::string> path{};
+    // Initialize a specimen
+    Stats stats{ 0.0, 0.0, 0.0, 0.0 };
+    std::vector<std::string> path{};
 
-	engine->restart();
+    engine->restart();
 
-	for (int i = 0; i < T; ++i)
-	{
-		std::cout << "Step " << i + 1 << ":\n";
-		auto step = single_step(stats, inclinations, engine);
+    for (int i = 0; i < T; ++i)
+    {
+        std::cout << "Step " << i + 1 << ":\n";
+        auto step = single_step(stats, inclinations, engine);
 
-		std::cout << "Current stats: "
-			<< "Strength: " << std::get<0>(stats) << ", "
-			<< "Constitution: " << std::get<1>(stats) << ", "
-			<< "Intelligence: " << std::get<2>(stats) << ", "
-			<< "Refinement: " << std::get<3>(stats) << "\n";
+        std::cout << "Current stats: "
+            << "Strength: " << std::get<0>(stats) << ", "
+            << "Constitution: " << std::get<1>(stats) << ", "
+            << "Intelligence: " << std::get<2>(stats) << ", "
+            << "Refinement: " << std::get<3>(stats) << "\n";
 
-		path.push_back(step);
-	}
+        path.push_back(step);
+    }
 
-	return std::make_pair(path, fitness(stats));
+    return std::make_pair(path, fitness(stats));
 }
 
 using SimulationResult = std::pair<
-	/** Sequence of action names */
-	std::vector<std::string>,
-	/** Fitness value */
-	double>;
+    /** Sequence of action names */
+    std::vector<std::string>,
+    /** Fitness value */
+    double>;
 
 void print_simulation_result(const SimulationResult& result)
 {
-	std::cout << "Simulation Result:\n";
-	std::cout << "Fitness: " << result.second << "\n";
-	std::cout << "Actions taken:\n";
-	for (const auto& action : result.first)
-	{
-		std::cout << "- " << action << "\n";
-	}
+    std::cout << "Simulation Result:\n";
+    std::cout << "Fitness: " << result.second << "\n";
+    std::cout << "Actions taken:\n";
+    for (const auto& action : result.first)
+    {
+        std::cout << "- " << action << "\n";
+    }
 }
 
 
 std::string choose_action_fast(fl::Engine* engine, const Stats& stats)
 {
-	// Load the specimen into the engine - assume that inclinations are already set
+    // Load the specimen into the engine - assume that inclinations are already set
 
-	engine->getInputVariable("strength")->setValue(std::get<0>(stats));
-	engine->getInputVariable("constitution")->setValue(std::get<1>(stats));
-	engine->getInputVariable("intelligence")->setValue(std::get<2>(stats));
-	engine->getInputVariable("refinement")->setValue(std::get<3>(stats));
+    engine->getInputVariable("strength")->setValue(std::get<0>(stats));
+    engine->getInputVariable("constitution")->setValue(std::get<1>(stats));
+    engine->getInputVariable("intelligence")->setValue(std::get<2>(stats));
+    engine->getInputVariable("refinement")->setValue(std::get<3>(stats));
 
-	// Get action priorities
-	engine->process();
+    // Get action priorities
+    engine->process();
 
-	const auto& output_vars = engine->outputVariables();
-	auto it = std::max_element(
-		output_vars.begin(), output_vars.end(),
-		[](const auto* a, const auto* b) {
-			// defaulting to 0 if the value is NaN
-			const auto left_priority = std::isnan(a->getValue()) ? 0.0 : a->getValue();
-			const auto right_priority = std::isnan(b->getValue()) ? 0.0 : b->getValue();
+    const auto& output_vars = engine->outputVariables();
+    auto it = std::max_element(
+        output_vars.begin(), output_vars.end(),
+        [](const auto* a, const auto* b) {
+            // defaulting to 0 if the value is NaN
+            const auto left_priority = std::isnan(a->getValue()) ? 0.0 : a->getValue();
+            const auto right_priority = std::isnan(b->getValue()) ? 0.0 : b->getValue();
 
-			return left_priority < right_priority;
-		}
-	);
+            return left_priority < right_priority;
+        }
+    );
 
-	// Either return the name of the action with the highest priority,
-	// or the first action if no rules fired (i.e., all priorities are 0).
-	std::string chosen_action_name = (it != output_vars.end())
-		? (*it)->getName()
-		: (*output_vars.begin())->getName();
+    // Either return the name of the action with the highest priority,
+    // or the first action if no rules fired (i.e., all priorities are 0).
+    std::string chosen_action_name = (it != output_vars.end())
+        ? (*it)->getName()
+        : (*output_vars.begin())->getName();
 
-	return chosen_action_name;
+    return chosen_action_name;
 }
 
 void single_step_fast(Stats& stats, fl::Engine* engine)
 {
-	// Choose an action based on the current stats and inclinations
-	std::string chosen_action_name = choose_action_fast(engine, stats);
-	// Apply the effects of the chosen action
-	Stats stats_diff = actions.at(chosen_action_name);
-	stats = sum_stats(stats, stats_diff);
+    // Choose an action based on the current stats and inclinations
+    std::string chosen_action_name = choose_action_fast(engine, stats);
+    // Apply the effects of the chosen action
+    Stats stats_diff = actions.at(chosen_action_name);
+    stats = sum_stats(stats, stats_diff);
 }
 
 double simulate_fast(const Inclinations& inclinations, fl::Engine* engine)
 {
-	// Initialize a specimen
-	Stats stats{ 0.0, 0.0, 0.0, 0.0 };
+    // Initialize a specimen
+    Stats stats{ 0.0, 0.0, 0.0, 0.0 };
 
-	engine->restart();
-	// Set inclinations
-	engine->getInputVariable("PhysicalInclination")->setValue(std::get<0>(inclinations));
-	engine->getInputVariable("MentalInclination")->setValue(std::get<1>(inclinations));
+    engine->restart();
+    // Set inclinations
+    engine->getInputVariable("PhysicalInclination")->setValue(std::get<0>(inclinations));
+    engine->getInputVariable("MentalInclination")->setValue(std::get<1>(inclinations));
 
-	for (int i = 0; i < T; ++i)
-	{
-		single_step_fast(stats, engine);
-	}
+    for (int i = 0; i < T; ++i)
+    {
+        single_step_fast(stats, engine);
+    }
 
-	return fitness(stats);
+    return fitness(stats);
 }
 
 static auto engine = init(); // this is super slow but fuzzylite is not prepared for multithreading so we need to create a new engine for each call
@@ -284,54 +422,54 @@ static auto engine = init(); // this is super slow but fuzzylite is not prepared
 // Pagmo2-compatible problem definition
 struct pm_problem {
 
-	// Implementation of the objective function.
-	pagmo::vector_double fitness(const pagmo::vector_double& dv) const
-	{
-		const Inclinations specimen{ dv[0], dv[1] };
+    // Implementation of the objective function.
+    pagmo::vector_double fitness(const pagmo::vector_double& dv) const
+    {
+        const Inclinations specimen{ dv[0], dv[1] };
 
-		std::unique_ptr<fl::Engine> engine_copy(engine.get()->clone()); // wrap in unique_ptr for automatic cleanup
+        std::unique_ptr<fl::Engine> engine_copy(engine.get()->clone()); // wrap in unique_ptr for automatic cleanup
 
-		return { simulate_fast(specimen, engine_copy.get())};
-	}
+        return { simulate_fast(specimen, engine_copy.get())};
+    }
 
-	/**
-	 * Implementation of the box bounds.
-	 * First element is the lower bound, second is the upper bound.
-	 * Bounds are inclination values for Physical and Mental inclinations.
-	 * 
-	 * (Range is 0.0 - 1.0, we hope that Pagmo2 will correctly interpolate between them)
-	 */
-	std::pair<pagmo::vector_double, pagmo::vector_double> get_bounds() const
-	{
-		return { {0., 0.}, {1., 1.} };
-	}
+    /**
+     * Implementation of the box bounds.
+     * First element is the lower bound, second is the upper bound.
+     * Bounds are inclination values for Physical and Mental inclinations.
+     * 
+     * (Range is 0.0 - 1.0, we hope that Pagmo2 will correctly interpolate between them)
+     */
+    std::pair<pagmo::vector_double, pagmo::vector_double> get_bounds() const
+    {
+        return { {0., 0.}, {1., 1.} };
+    }
 };
 
 int main()
 {
-	pagmo::problem prob(pm_problem{});
+    pagmo::problem prob(pm_problem{});
 
-	pagmo::algorithm algo(pagmo::sade(100));
+    pagmo::algorithm algo(pagmo::sade(100));
 
-	pagmo::archipelago archi(16u, algo, prob, 20u);
+    pagmo::archipelago archi(16u, algo, prob, 20u);
 
-	archi.evolve(10);
+    archi.evolve(10);
 
-	archi.wait_check();
+    archi.wait_check();
 
-	for (const auto& isl : archi)
-	{
-		const auto& champion = isl.get_population().champion_x();
-		std::cout << "island champion: {" << champion[0] << ", " << champion[1] << "}\n";
+    for (const auto& isl : archi)
+    {
+        const auto& champion = isl.get_population().champion_x();
+        std::cout << "island champion: {" << champion[0] << ", " << champion[1] << "}\n";
 
-		auto engine = init();
-		const auto& result = simulate(
-			{ champion[0], champion[1] },
-			engine.get()
-		);
+        auto engine = init();
+        const auto& result = simulate(
+            { champion[0], champion[1] },
+            engine.get()
+        );
 
-		print_simulation_result(result);
-	}
+        print_simulation_result(result);
+    }
 
-	return 0;
+    return 0;
 }

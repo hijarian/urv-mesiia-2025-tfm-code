@@ -1,0 +1,634 @@
+Engine: Trivial
+
+# Inclinations
+
+InputVariable: InclinationFighting
+  enabled: true
+  range: 0 1.000
+  lock-range: false
+  term: tiny Ramp 0.330 0.000 
+  term: low Triangle 0.000 0.330 0.670
+  term: high Triangle 0.330 0.670 1.000
+  term: highest Ramp 0.670 1.000
+InputVariable: InclinationMagic
+  enabled: true
+  range: 0 1.000
+  lock-range: false
+  term: tiny Ramp 0.330 0.000 
+  term: low Triangle 0.000 0.330 0.670
+  term: high Triangle 0.330 0.670 1.000
+  term: highest Ramp 0.670 1.000
+InputVariable: InclinationHousekeeping
+  enabled: true
+  range: 0 1.000
+  lock-range: false
+  term: tiny Ramp 0.330 0.000 
+  term: low Triangle 0.000 0.330 0.670
+  term: high Triangle 0.330 0.670 1.000
+  term: highest Ramp 0.670 1.000
+InputVariable: InclinationArtistry
+  enabled: true
+  range: 0 1.000
+  lock-range: false
+  term: tiny Ramp 0.330 0.000 
+  term: low Triangle 0.000 0.330 0.670
+  term: high Triangle 0.330 0.670 1.000
+  term: highest Ramp 0.670 1.000
+InputVariable: InclinationSinfulness
+  enabled: true
+  range: 0 1.000
+  lock-range: false
+  term: tiny Ramp 0.330 0.000 
+  term: low Triangle 0.000 0.330 0.670
+  term: high Triangle 0.330 0.670 1.000
+  term: highest Ramp 0.670 1.000
+
+# Attributes
+
+InputVariable: strength
+  enabled: true
+  range: 0 810
+  lock-range: false
+  term: little Ramp 270 0 
+  term: low Triangle 0 270 540
+  term: high Triangle 270 540 810
+  term: best Ramp 540 810
+InputVariable: constitution
+  enabled: true
+  range: 0 810
+  lock-range: false
+  term: little Ramp 270 0 
+  term: low Triangle 0 270 540
+  term: high Triangle 270 540 810
+  term: best Ramp 540 810
+InputVariable: intelligence
+  enabled: true
+  range: 0 810
+  lock-range: false
+  term: little Ramp 270 0 
+  term: low Triangle 0 270 540
+  term: high Triangle 270 540 810
+  term: best Ramp 540 810
+InputVariable: refinement
+  enabled: true
+  range: 0 810
+  lock-range: false
+  term: little Ramp 270 0 
+  term: low Triangle 0 270 540
+  term: high Triangle 270 540 810
+  term: best Ramp 540 810
+InputVariable: charisma
+  enabled: true
+  range: 0 810
+  lock-range: false
+  term: little Ramp 270 0 
+  term: low Triangle 0 270 540
+  term: high Triangle 270 540 810
+  term: best Ramp 540 810
+InputVariable: morality
+  enabled: true
+  range: 0 810
+  lock-range: false
+  term: little Ramp 270 0 
+  term: low Triangle 0 270 540
+  term: high Triangle 270 540 810
+  term: best Ramp 540 810
+InputVariable: faith
+  enabled: true
+  range: 0 810
+  lock-range: false
+  term: little Ramp 270 0 
+  term: low Triangle 0 270 540
+  term: high Triangle 270 540 810
+  term: best Ramp 540 810
+InputVariable: sin
+  enabled: true
+  range: 0 810
+  lock-range: false
+  term: little Ramp 270 0 
+  term: low Triangle 0 270 540
+  term: high Triangle 270 540 810
+  term: best Ramp 540 810
+InputVariable: sensitivity
+  enabled: true
+  range: 0 810
+  lock-range: false
+  term: little Ramp 270 0 
+  term: low Triangle 0 270 540
+  term: high Triangle 270 540 810
+  term: best Ramp 540 810
+
+# Skills (same as attributes but range is 0-540 instead of 0-810)
+InputVariable: CombatSkill
+  enabled: true
+  range: 0 540
+  lock-range: false
+  term: little Ramp 180 0 
+  term: low Triangle 0 180 360
+  term: high Triangle 180 360 540
+  term: best Ramp 360 540
+InputVariable: CombatAttack
+  enabled: true
+  range: 0 540
+  lock-range: false
+  term: little Ramp 180 0 
+  term: low Triangle 0 180 360
+  term: high Triangle 180 360 540
+  term: best Ramp 360 540
+InputVariable: CombatDefense
+  enabled: true
+  range: 0 540
+  lock-range: false
+  term: little Ramp 180 0 
+  term: low Triangle 0 180 360
+  term: high Triangle 180 360 540
+  term: best Ramp 360 540
+InputVariable: MagicSkill
+  enabled: true
+  range: 0 540
+  lock-range: false
+  term: little Ramp 180 0 
+  term: low Triangle 0 180 360
+  term: high Triangle 180 360 540
+  term: best Ramp 360 540
+InputVariable: MagicAttack
+  enabled: true
+  range: 0 540
+  lock-range: false
+  term: little Ramp 180 0 
+  term: low Triangle 0 180 360
+  term: high Triangle 180 360 540
+  term: best Ramp 360 540
+InputVariable: MagicDefense
+  enabled: true
+  range: 0 540
+  lock-range: false
+  term: little Ramp 180 0 
+  term: low Triangle 0 180 360
+  term: high Triangle 180 360 540
+  term: best Ramp 360 540
+InputVariable: Decorum
+  enabled: true
+  range: 0 540
+  lock-range: false
+  term: little Ramp 180 0 
+  term: low Triangle 0 180 360
+  term: high Triangle 180 360 540
+  term: best Ramp 360 540
+InputVariable: Artistry
+  enabled: true
+  range: 0 540
+  lock-range: false
+  term: little Ramp 180 0 
+  term: low Triangle 0 180 360
+  term: high Triangle 180 360 540
+  term: best Ramp 360 540
+InputVariable: Eloquence
+  enabled: true
+  range: 0 540
+  lock-range: false
+  term: little Ramp 180 0 
+  term: low Triangle 0 180 360
+  term: high Triangle 180 360 540
+  term: best Ramp 360 540
+InputVariable: CookingSkill
+  enabled: true
+  range: 0 540
+  lock-range: false
+  term: little Ramp 180 0 
+  term: low Triangle 0 180 360
+  term: high Triangle 180 360 540
+  term: best Ramp 360 540
+InputVariable: CleaningSkill
+  enabled: true
+  range: 0 540
+  lock-range: false
+  term: little Ramp 180 0 
+  term: low Triangle 0 180 360
+  term: high Triangle 180 360 540
+  term: best Ramp 360 540
+InputVariable: Temper
+  enabled: true
+  range: 0 540
+  lock-range: false
+  term: little Ramp 180 0 
+  term: low Triangle 0 180 360
+  term: high Triangle 180 360 540
+  term: best Ramp 360 540
+
+# Action Priorities
+
+## Jobs
+
+OutputVariable: Hunting
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: Lumberjack
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: Housework
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: Babysitting
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: Church
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: Farming
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: Innkeeping
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: Restaurant
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: Salon
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: Masonry
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: Graveyard
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: Bar
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: Tutoring
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: SleazyBar
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: Cabaret
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+## Classes
+
+OutputVariable: DanceClass
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: FencingClass
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: FightingClass
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: MagicClass
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: PaintingClass
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: PoetryClass
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: StrategyClass
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: ScienceClass
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: TheologyClass
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+OutputVariable: MannersClass
+  enabled: true
+  range: 0.000 1.000
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: Centroid 100
+  default: nan
+  lock-previous: false
+  term: low Ramp 0.500 0.000
+  term: medium Triangle 0.000 0.500 1.000
+  term: high Ramp 0.500 1.000
+
+
+# Rules
+
+RuleBlock: mamdani
+  enabled: true
+  conjunction: Minimum
+  disjunction: Maximum
+  implication: AlgebraicProduct
+  activation: General
+  # at least one rule for each action priority
+  #
+  rule: if MentalInclination is high   and PhysicalInclination is low  then Lumberjack is low
+  rule: if PhysicalInclination is high and MentalInclination is low    then Lumberjack is medium
+  rule: if PhysicalInclination is high and MentalInclination is low    then Lumberjack is high
+  #
+  rule: if MentalInclination is high   and PhysicalInclination is high then Hunting is high
+  rule: if PhysicalInclination is high and MentalInclination is low    then Hunting is medium
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Hunting is low
+  #
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Housework is high
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Housework is medium
+  rule: if MentalInclination is high   and PhysicalInclination is high then Housework is low
+  #
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Babysitting is high
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Babysitting is medium
+  rule: if MentalInclination is high   and PhysicalInclination is high then Babysitting is low
+  #
+  rule: if MentalInclination is high   and PhysicalInclination is low  then Church is low
+  rule: if PhysicalInclination is high and MentalInclination is low    then Church is medium
+  rule: if PhysicalInclination is high and MentalInclination is low    then Church is high
+  #
+  rule: if MentalInclination is high   and PhysicalInclination is high then Farming is high
+  rule: if PhysicalInclination is high and MentalInclination is low    then Farming is medium
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Farming is low
+  #
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Innkeeping is high
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Innkeeping is medium
+  rule: if MentalInclination is high   and PhysicalInclination is high then Innkeeping is low
+  #
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Restaurant is high
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Restaurant is medium
+  rule: if MentalInclination is high   and PhysicalInclination is high then Restaurant is low
+  #
+  rule: if MentalInclination is high   and PhysicalInclination is low  then Salon is low
+  rule: if PhysicalInclination is high and MentalInclination is low    then Salon is medium
+  rule: if PhysicalInclination is high and MentalInclination is low    then Salon is high
+  #
+  rule: if MentalInclination is high   and PhysicalInclination is high then Masonry is high
+  rule: if PhysicalInclination is high and MentalInclination is low    then Masonry is medium
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Masonry is low
+  #
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Graveyard is high
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Graveyard is medium
+  rule: if MentalInclination is high   and PhysicalInclination is high then Graveyard is low
+  #
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Bar is high
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Bar is medium
+  rule: if MentalInclination is high   and PhysicalInclination is high then Bar is low
+  #
+  rule: if MentalInclination is high   and PhysicalInclination is low  then Tutoring is low
+  rule: if PhysicalInclination is high and MentalInclination is low    then Tutoring is medium
+  rule: if PhysicalInclination is high and MentalInclination is low    then Tutoring is high
+  #
+  rule: if MentalInclination is high   and PhysicalInclination is high then SleazyBar is high
+  rule: if PhysicalInclination is high and MentalInclination is low    then SleazyBar is medium
+  rule: if PhysicalInclination is low  and MentalInclination is low    then SleazyBar is low
+  #
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Cabaret is high
+  rule: if PhysicalInclination is low  and MentalInclination is low    then Cabaret is medium
+  rule: if MentalInclination is high   and PhysicalInclination is high then Cabaret is low
+  # Classes
+  rule: if PhysicalInclination is low  and MentalInclination is low    then DanceClass is high
+  rule: if PhysicalInclination is low  and MentalInclination is low    then DanceClass is medium
+  rule: if MentalInclination is high   and PhysicalInclination is high then DanceClass is low
+  #
+  rule: if PhysicalInclination is low  and MentalInclination is low    then FencingClass is high
+  rule: if PhysicalInclination is low  and MentalInclination is low    then FencingClass is medium
+  rule: if MentalInclination is high   and PhysicalInclination is high then FencingClass is low
+  #
+  rule: if PhysicalInclination is low  and MentalInclination is low    then FightingClass is high
+  rule: if PhysicalInclination is low  and MentalInclination is low    then FightingClass is medium
+  rule: if MentalInclination is high   and PhysicalInclination is high then FightingClass is low
+  #
+  rule: if PhysicalInclination is low  and MentalInclination is low    then MagicClass is high
+  rule: if PhysicalInclination is low  and MentalInclination is low    then MagicClass is medium
+  rule: if MentalInclination is high   and PhysicalInclination is high then MagicClass is low
+  #
+  rule: if PhysicalInclination is low  and MentalInclination is low    then PaintingClass is high
+  rule: if PhysicalInclination is low  and MentalInclination is low    then PaintingClass is medium
+  rule: if MentalInclination is high   and PhysicalInclination is high then PaintingClass is low
+  #
+  rule: if PhysicalInclination is low  and MentalInclination is low    then PoetryClass is high
+  rule: if PhysicalInclination is low  and MentalInclination is low    then PoetryClass is medium
+  rule: if MentalInclination is high   and PhysicalInclination is high then PoetryClass is low
+  #
+  rule: if PhysicalInclination is low  and MentalInclination is low    then StrategyClass is high
+  rule: if PhysicalInclination is low  and MentalInclination is low    then StrategyClass is medium
+  rule: if MentalInclination is high   and PhysicalInclination is high then StrategyClass is low
+  #
+  rule: if PhysicalInclination is low  and MentalInclination is low    then TheologyClass is high
+  rule: if PhysicalInclination is low  and MentalInclination is low    then TheologyClass is medium
+  rule: if MentalInclination is high   and PhysicalInclination is high then TheologyClass is low
+  #
+  rule: if PhysicalInclination is low  and MentalInclination is low    then MannersClass is high
+  rule: if PhysicalInclination is low  and MentalInclination is low    then MannersClass is medium
+  rule: if MentalInclination is high   and PhysicalInclination is high then MannersClass is low
+  #
+  rule: if MentalInclination is high   and PhysicalInclination is low  then ScienceClass is high
+  rule: if PhysicalInclination is high and MentalInclination is low    then ScienceClass is medium
+  rule: if PhysicalInclination is high and MentalInclination is low    then ScienceClass is low
