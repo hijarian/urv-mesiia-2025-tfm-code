@@ -1,4 +1,4 @@
-Engine: Trivial
+Engine: Baseline
 
 # Inclinations
 
@@ -570,7 +570,7 @@ RuleBlock: mamdani
   rule: if InclinationFighting is high   and constitution is low then Masonry is high
   rule: if InclinationArtistry is high  and charisma is low    then Masonry is low
   #
-  rule: if InclinationMagic is high  and MagicDefence is low  then Graveyard is high
+  rule: if InclinationMagic is high  and MagicDefense is low  then Graveyard is high
   rule: if InclinationArtistry is high  and sensitivity is low  then Graveyard is high
   rule: if InclinationArtistry is high   and charisma is low then Graveyard is low
   #
@@ -595,7 +595,7 @@ RuleBlock: mamdani
   # Classes
   rule: if InclinationFighting is high  and constitution is low    then DanceClass is high
   rule: if InclinationArtistry is high  and charisma is low    then DanceClass is high
-  rule: if InclinationArtistry is high  and Art is low    then DanceClass is high
+  rule: if InclinationArtistry is high  and Artistry is low    then DanceClass is high
   rule: if InclinationMagic is high  then DanceClass is low
   #
   rule: if InclinationFighting is high  and CombatSkill is low    then FencingClass is high
@@ -603,7 +603,7 @@ RuleBlock: mamdani
   rule: if InclinationHousekeeping is high then FencingClass is low
   #
   rule: if InclinationFighting is high  and CombatSkill is low    then FightingClass is high
-  rule: if InclinationFighting is high  and CombatDefence is low    then FightingClass is high
+  rule: if InclinationFighting is high  and CombatDefense is low    then FightingClass is high
   rule: if InclinationHousekeeping is high then FightingClass is low
   #
   rule: if InclinationMagic is high  and MagicSkill is low    then MagicClass is high
@@ -613,12 +613,12 @@ RuleBlock: mamdani
   rule: if InclinationArtistry is high  and sensitivity is low then PaintingClass is high
   rule: if InclinationArtistry is high  and refinement is low then PaintingClass is high
   rule: if InclinationMagic is high  and intelligence is low then PaintingClass is high
-  rule: if InclinationArtistry is high  and Art is low then PaintingClass is high
+  rule: if InclinationArtistry is high  and Artistry is low then PaintingClass is high
   rule: if InclinationFighting is high then PaintingClass is low
   #
   rule: if InclinationArtistry is high  and refinement is low    then PoetryClass is high
   rule: if InclinationArtistry is high  and sensitivity is low    then PoetryClass is high
-  rule: if InclinationArtistry is high  and Art is low    then PoetryClass is high
+  rule: if InclinationArtistry is high  and Artistry is low    then PoetryClass is high
   rule: if InclinationMagic is high  and intelligence is low then PoetryClass is high
   rule: if InclinationFighting is high then PoetryClass is low
   #
@@ -627,7 +627,7 @@ RuleBlock: mamdani
   rule: if InclinationArtistry is high   and sensitivity is low then StrategyClass is low
   #
   rule: if InclinationMagic is high  and intelligence is low    then TheologyClass is high
-  rule: if InclinationMagic is high  and MagicDefence is low    then TheologyClass is high
+  rule: if InclinationMagic is high  and MagicDefense is low    then TheologyClass is high
   rule: if InclinationHousekeeping is high   and faith is low then TheologyClass is high
   rule: if InclinationSinfulness is high then TheologyClass is low
   #
@@ -636,5 +636,5 @@ RuleBlock: mamdani
   rule: if InclinationHousekeeping is high then MannersClass is low
   #
   rule: if InclinationMagic is high and intelligence is low  then ScienceClass is high
-  rule: if InclinationMagic is high and MagicDefence is low  then ScienceClass is low
+  rule: if InclinationMagic is high and MagicDefense is low  then ScienceClass is low
   rule: if InclinationHousekeeping is high and faith is low    then ScienceClass is low
