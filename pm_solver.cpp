@@ -15,27 +15,27 @@
 #include <pagmo/problems/schwefel.hpp>
 
 using Stats = std::tuple<
-    int, // strength
+    int, //0 strength
     int, // constitution
     int, // intelligence
     int, // refinement
-    int, // charisma
+    int, //4 charisma
     int, // morality
     int, // faith
     int, // sin
     int, // sensitivity
 
-    int, // combat skill
+    int, //9 combat skill
     int, // combat attack
     int, // combat defense
     int, // magic skill
     int, // magic attack
-    int, // magic defense
+    int, //14 magic defense
     int, // decorum
 	int, // artistry skill
     int, // eloquence
     int, // cooking skill
-    int, // cleaning skill
+    int, //19 cleaning skill
     int, // temperament
 >;
 
@@ -334,8 +334,34 @@ std::string single_step(Stats& stats, const Inclinations& inclinations, fl::Engi
 /** the lower the better (conforming to pagmo2 conventions) */
 double fitness(const Stats& stats)
 {
-    // demo fitness: desirable refinement is 0.05+
-    return 0.05 - std::get<1>(stats);
+    // Social reputation > 100
+	const int social_reputation = std::get<3>(stats) + std::get<4>(stats) + std::get<5>(stats)
+        + std::get<15>(stats) + std::get<16>(stats) + std::get<17>(stats);
+
+    // Fighter reputation < 100
+    const int fighter_reputation = std::get<0>(stats) + std::get<1>(stats)
+		+ std::get<9>(stats) + std::get<10>(stats) + std::get<11>(stats);
+
+	// the higher the social reputation than the 100 the lower the fitness value
+	// the higher the fighter reputation than the 100 the higher the fitness value
+	// social reputation > 100, fighter reputation = 0 => fitness = 0
+    // social reputation < 100, fighter reputation = 0 => fitness > 0
+    // social reputation > 100, fighter reputation > 0 => fitness > 0
+	// social reputation < 100, fighter reputation > 0 => fitness >> 0
+	
+	double fitness_value = 0.0;
+	
+	// Penalty if social reputation is below 100
+	if (social_reputation < 100) {
+		fitness_value += (100 - social_reputation);
+	}
+	
+	// Penalty if fighter reputation is above 0
+	if (fighter_reputation > 0) {
+		fitness_value += fighter_reputation;
+	}
+	
+	return fitness_value;
 }
 
 constexpr int T = 4; // number of steps to take
