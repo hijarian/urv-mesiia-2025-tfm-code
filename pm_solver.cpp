@@ -332,7 +332,7 @@ std::string single_step(Stats& stats, const Inclinations& inclinations, fl::Engi
 }
 
 /** the lower the better (conforming to pagmo2 conventions) */
-double fitness(const Stats& stats)
+double fitness_bak(const Stats& stats)
 {
     // Social reputation > 100
 	const int social_reputation = std::get<3>(stats) + std::get<4>(stats) + std::get<5>(stats)
@@ -364,7 +364,49 @@ double fitness(const Stats& stats)
 	return fitness_value;
 }
 
-constexpr int T = 120; // number of steps to take
+double fitness(const Stats& stats)
+{
+    // ``General'' ending
+    /*
+     Intelligence stat $ > 500$ and $ > $ than Sensitivity stat
+    Morality stat $ > 30$
+    Faith stat $ > 300$ and $ > $ than Sensitivity
+    ``Fighting reputation'' which is a sum of all fighting - related stats and skills, $ > 421$
+    */
+    const int fighter_reputation = std::get<0>(stats) + std::get<1>(stats)
+        + std::get<9>(stats) + std::get<10>(stats) + std::get<11>(stats);
+
+	// if sensitivity is higher than intelligence or faith, return an absolute instant loss
+    if (std::get<8>(stats) >= std::get<2>(stats) || std::get<8>(stats) >= std::get<6>(stats)) {
+        return std::numeric_limits<double>::max();
+	}
+
+	double fitness_value = 0.0;
+
+	// add penalty for intelligence below 500
+    if (std::get<2>(stats) < 500) {
+        fitness_value += (500 - std::get<2>(stats));
+	}
+
+	// add penalty for morality below 30
+    if (std::get<5>(stats) < 30) {
+        fitness_value += (30 - std::get<5>(stats));
+	}
+
+    // add penalty for faith below 300
+    if (std::get<6>(stats) < 300) {
+        fitness_value += (300 - std::get<6>(stats));
+	}
+
+	// add penalty for fighter reputation below 421
+    if (fighter_reputation < 421) {
+		fitness_value += (421 - fighter_reputation);
+	}
+
+    return fitness_value;
+}
+
+constexpr int T = 1200; // number of steps to take
 
 std::pair<std::vector<std::string>, double> simulate(const Inclinations& inclinations, fl::Engine* engine)
 {
